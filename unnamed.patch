@@ -1,0 +1,5953 @@
+Index: src/com/mahongchao/jianzhiOffer/Main3.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/mahongchao/jianzhiOffer/Main3.java	(date 1586245997352)
++++ src/com/mahongchao/jianzhiOffer/Main3.java	(date 1586245997352)
+@@ -0,0 +1,25 @@
++package com.mahongchao.jianzhiOffer;
++
++import java.util.ArrayList;
++import java.util.Stack;
++
++/**
++ * 从尾到头顺序，可以借助栈stack先入后出的规则
++ */
++public class Main3 {
++    private ArrayList<Integer> ToArrayList(ListNode listNode) {
++        Stack<Integer> stack = new Stack<>();
++        while (listNode != null) {
++            stack.push(listNode.val);
++            listNode = listNode.next;
++        }
++        ArrayList<Integer> list = new ArrayList<>();
++        while (!stack.isEmpty()) {
++            list.add(stack.pop());
++        }
++        return list;
++    }
++    public static void main(String[] args){
++
++    }
++}
+Index: src/com/mahongchao/jianzhiOffer/ListNode.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/mahongchao/jianzhiOffer/ListNode.java	(date 1586065540587)
++++ src/com/mahongchao/jianzhiOffer/ListNode.java	(date 1586065540587)
+@@ -0,0 +1,10 @@
++package com.mahongchao.jianzhiOffer;
++
++public class ListNode {
++    int val;
++    ListNode next = null;
++
++    ListNode(int val) {
++        this.val = val;
++    }
++}
+Index: src/com/mahongchao/jianzhiOffer/Main2.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/mahongchao/jianzhiOffer/Main2.java	(date 1586245997340)
++++ src/com/mahongchao/jianzhiOffer/Main2.java	(date 1586245997340)
+@@ -0,0 +1,17 @@
++package com.mahongchao.jianzhiOffer;
++
++/**
++ * 调用string的replaceAll()方法实现转换
++ */
++public class Main2 {
++    private static String replaceSpace(StringBuffer s) {
++        String s1 = s.toString().replaceAll(" ", "%20");
++        return s1;
++    }
++
++    public static void main(String[] args) {
++        StringBuffer s = new StringBuffer(" how are you");
++        String x = replaceSpace(s);
++        System.out.println(x);
++    }
++}
+Index: src/com/mahongchao/jianzhiOffer/Main1.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/mahongchao/jianzhiOffer/Main1.java	(date 1586245997264)
++++ src/com/mahongchao/jianzhiOffer/Main1.java	(date 1586245997264)
+@@ -0,0 +1,37 @@
++package com.mahongchao.jianzhiOffer;
++
++/*
++ *在一个二维数组中（每个一维数组的长度相同），每一行都按照从左到右递增的顺序排序，
++ *每一列都按照从上到下递增的顺序排序。请完成一个函数，输入这样的一个二维数组和一个
++ *整数，判断数组中是否含有该整数。
++ */
++public class Main1 {
++    /*
++        思路：
++        根据数组的特点可以发现,如果从左下角开始查找更为方便；
++        左下角的数比同一列的数大，同时比同一行的数小；
++        也就是从左下角开始比，如果target传入的数大于它则列数加一继续比较，如果小于它则行数减一继续比较
++    */
++    private static boolean findInArray(int k, int[][] a) {
++        int row = a.length;
++        int col = a[0].length;
++        int i = row - 1, j = 0;
++        while (0 <= i && i < row && 0 <= j && j < col) {
++            //从左下角开始比较（同行最小，同列最大）
++            if (a[i][j] < k) {
++                j++;
++            } else if (a[i][j] > k) {
++                i--;
++            } else {
++                return true;
++            }
++        }
++        return false;
++    }
++
++    public static void main(String[] args) {
++        int a[][] = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
++        boolean flag = findInArray(11, a);
++        System.out.println(flag);
++    }
++}
+Index: src/com/mahongchao/BinaryTree/test2.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/mahongchao/BinaryTree/test2.java	(date 1585281211796)
++++ src/com/mahongchao/BinaryTree/test2.java	(date 1585281211796)
+@@ -0,0 +1,31 @@
++package com.mahongchao.BinaryTree;
++
++import java.util.ArrayList;
++import java.util.List;
++
++public class test2 {
++    public static String getLuckyPrice(int price, List<Integer> unlucky_numbers) {
++        char[] chars = (price + "").toCharArray();//1000
++        for (int j = 0; j < chars.length; j++) {
++            if (chars[j] == '0') {
++                chars[j]++;
++            }
++            for (Integer i : unlucky_numbers) {
++                if (Integer.toString(i).equals(chars[j])) {
++                    chars[j]++;
++                }
++            }
++        }
++        return new String(chars);
++    }
++
++    public static void main(String[] args) {
++        List<Integer> list = new ArrayList<>();
++        list.add(1);
++        list.add(4);
++        list.add(7);
++        list.add(8);
++        System.out.println(getLuckyPrice(1000, list));
++
++    }
++}
+Index: src/com/mahongchao/array/FindSecondMax.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/mahongchao/array/FindSecondMax.java	(date 1585041371879)
++++ src/com/mahongchao/array/FindSecondMax.java	(date 1585041371879)
+@@ -0,0 +1,26 @@
++package com.mahongchao.array;
++
++/**
++ * 求数组中第二大元素
++ */
++public class FindSecondMax {
++    private static void findSecond(int a[]) {
++        int firMax = a[0], secMax = Integer.MIN_VALUE;
++        for (int i = 1; i < a.length; i++) {
++            if (a[i] > firMax) {
++                secMax = firMax;
++                firMax = a[i];
++            } else {
++                if (secMax < a[i]) {
++                    secMax = a[i];
++                }
++            }
++        }
++        System.out.println(secMax);
++    }
++
++    public static void main(String[] args) {
++        int a[] = {1, 3, 4, 5, 6};
++        findSecond(a);
++    }
++}
+Index: src/com/mahongchao/BinaryTree/Main.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/mahongchao/BinaryTree/Main.java	(date 1586059320757)
++++ src/com/mahongchao/BinaryTree/Main.java	(date 1586059320757)
+@@ -0,0 +1,35 @@
++package com.mahongchao.BinaryTree;
++
++
++import java.util.Scanner;
++
++public class Main {
++    private static String find(long N, int L) {
++        if (L > N || L > 100 || L < 2 || N < 1 || N > 1000000000) return "No ";
++        String line = "";
++        for (; L <= 100 && L <= N; L++) {
++            if ((2 * N) % L == 0 && ((2 * N) / L + 1 - L) % 2 == 0) {
++                long s = ((2 * N) / L + 1 - L) / 2;
++                int j = 0;
++                while (j < L) {
++                    line += String.valueOf(s) + " ";
++                    s += 1;
++                    j++;
++                }
++                return line;
++            }
++        }
++        return "No ";
++    }
++
++    public static void main(String[] args) {
++        Scanner scan = new Scanner(System.in);
++        long n = scan.nextLong();
++        int l = scan.nextInt();
++        String s = find(n, l);
++        char[] chars = s.toCharArray();
++        for (int i = 0; i < chars.length - 1; i++) {
++            System.out.print(chars[i]);
++        }
++    }
++}
+Index: src/com/mahongchao/wei/NumberOf1.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/mahongchao/wei/NumberOf1.java	(date 1586092347848)
++++ src/com/mahongchao/wei/NumberOf1.java	(date 1586092347848)
+@@ -0,0 +1,56 @@
++package com.mahongchao.wei;
++
++/**
++ * 二进制中1的个数
++ */
++public class NumberOf1 {
++    /**
++     * 移位法：时间复杂度：O(n)
++     *
++     * @param i
++     * @return
++     */
++    private static int number1(int i) {
++        int count = 0;
++        while (i > 0) {
++            if ((i & 1) == 1) {
++                count++;
++            }
++            i = i >> 1;//右移一位
++        }
++        return count;
++    }
++
++    /**
++     * 二进制法：
++     *
++     * @param i
++     * @return
++     */
++    private static int number2(int i) {
++        int count = 0;
++        while (i > 0) {
++            i = i & (i - 1);//每进行一次计算，最后一位少一个1
++            count++;
++        }
++        return count;
++    }
++
++    private static int number3(int i) {
++        int count = 0;
++        String s = Integer.toBinaryString(i);
++        char[] c = s.toCharArray();
++        for (int j = 0; j < c.length; j++) {
++            if (c[j] == '1') {
++                count++;
++            }
++        }
++        return count;
++    }
++
++    public static void main(String[] args) {
++        System.out.println(number1(7));
++        System.out.println(number2(7));
++        System.out.println(number3(-1));
++    }
++}
+Index: src/com/mahongchao/array/FindMinMaxInArray.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/mahongchao/array/FindMinMaxInArray.java	(date 1585040882612)
++++ src/com/mahongchao/array/FindMinMaxInArray.java	(date 1585040882612)
+@@ -0,0 +1,92 @@
++package com.mahongchao.array;
++
++/**
++ * 找到数组中最大和最小元素
++ */
++public class FindMinMaxInArray {
++
++    /**
++     * 取双元素法：时间复杂度：O(n)
++     *
++     * @param a
++     */
++    private static void findMinMax1(int a[]) {
++        int min = a[0], max = a[0];
++        for (int i = 1; i < a.length - 1; i = i + 2) {
++            if (i + 2 == a.length - 1) {
++                if (min > a[i + 2]) {
++                    min = a[i + 2];
++                }
++                if (max < a[i + 2]) {
++                    max = a[i + 2];
++                }
++            }
++            if (a[i] < a[i + 1]) {
++                if (min > a[i]) {
++                    min = a[i];
++                }
++                if (max < a[i + 1]) {
++                    max = a[i + 1];
++                }
++            }
++            if (a[i] > a[i + 1]) {
++                if (min > a[i + 1]) {
++                    min = a[i + 1];
++                }
++                if (max < a[i]) {
++                    max = a[i];
++                }
++            }
++
++        }
++        System.out.println("数组中最小的元素：" + min);
++        System.out.println("数组中最大的元素：" + max);
++    }
++
++    /**
++     * 取单元素法：时间复杂度：O(n)
++     *
++     * @param a
++     */
++    private static void findMinMax2(int a[]) {
++        int min = a[0], max = a[0];
++        for (int i = 1; i < a.length; i++) {
++            if (min > a[i]) {
++                min = a[i];
++            }
++            if (max < a[i]) {
++                max = a[i];
++            }
++        }
++        System.out.println("数组中最小的元素：" + min);
++        System.out.println("数组中最大的元素：" + max);
++    }
++
++    /**
++     * 分解法：分别求最大最小  时间复杂度：O(n^2)
++     *
++     * @param a
++     */
++    private static void findMinMax3(int a[]) {
++        int min = a[0], max = a[0];
++        for (int i = 1; i < a.length; i++) {
++            if (min > a[i]) {
++                min = a[i];
++            }
++        }
++        System.out.println("数组中最小的元素：" + min);
++        for (int i = 1; i < a.length; i++) {
++            if (max < a[i]) {
++                max = a[i];
++            }
++        }
++        System.out.println("数组中最大的元素：" + max);
++    }
++
++    public static void main(String[] args) {
++        int a[] = {1, 3, 8, 7, 5, 9};
++        //findMinMax3(a);
++        //findMinMax2(a);
++        findMinMax1(a);
++    }
++}
+Index: src/com/mahongchao/wei/YiweishixianChengfa.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/mahongchao/wei/YiweishixianChengfa.java	(date 1585032853242)
++++ src/com/mahongchao/wei/YiweishixianChengfa.java	(date 1585032853242)
+@@ -0,0 +1,15 @@
++package com.mahongchao.wei;
++
++/**
++ * 移位实现乘法
++ */
++public class YiweishixianChengfa {
++    private static int yiweiChengfa(int i, int j) {
++        int x = i << j;//左移几位就是乘以2几次方
++        return x;
++    }
++
++    public static void main(String[] args) {
++        System.out.println("3乘以8等于：" + yiweiChengfa(3, 3));
++    }
++}
+Index: src/com/mahongchao/wei/Is2ncifang.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/mahongchao/wei/Is2ncifang.java	(date 1585036743032)
++++ src/com/mahongchao/wei/Is2ncifang.java	(date 1585036743032)
+@@ -0,0 +1,39 @@
++package com.mahongchao.wei;
++
++/**
++ * 判断一个数是否是2的n次方
++ */
++public class Is2ncifang {
++    /**
++     * 移位法：时间复杂度：O(logn)；空间复杂度：O(1)
++     *
++     * @param i
++     * @return
++     */
++    private static boolean is2n1(int i) {
++        int x = 1;
++        while (x <= i) {
++            x = x << 1;
++            if (x == i) {
++                return true;
++            }
++        }
++        return false;
++    }
++
++    /**
++     * 二进制法：这个数的二进制只有一位是1，i&(i-1)==0判断
++     *
++     * @param i
++     * @return
++     */
++    private static boolean is2n2(int i) {
++        int x = i & (i - 1);
++        return x == 0;
++    }
++
++    public static void main(String[] args) {
++        System.out.println(is2n1(16));
++        System.out.println(is2n2(14));
++    }
++}
+Index: src/package-info.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/package-info.java	(date 1586061875197)
++++ src/package-info.java	(date 1586061875197)
+@@ -0,0 +1,0 @@
+Index: src/com/mahongchao/BinaryTree/MaxDistence.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/mahongchao/BinaryTree/MaxDistence.java	(date 1584175687129)
++++ src/com/mahongchao/BinaryTree/MaxDistence.java	(date 1584175687129)
+@@ -0,0 +1,38 @@
++package com.mahongchao.BinaryTree;
++
++/**
++ * 二叉树的最大距离
++ */
++public class MaxDistence {
++    int maxDis = 0;
++
++    public int max(int a, int b) {
++        return a > b ? a : b;
++    }
++
++    public int findMaxDistence(Node root) {
++        if (root == null) {
++            return -1;
++        }
++        if (root.left == null) {
++            root.leftMaxDistence = 0;
++        } else {
++            findMaxDistence(root.left);
++        }
++        if (root.right == null) {
++            root.rightMaxDistence = 0;
++        } else {
++            findMaxDistence(root.right);
++        }
++        if (root.left != null) {
++            root.leftMaxDistence = max(root.left.leftMaxDistence, root.left.rightMaxDistence);
++        }
++        if (root.right != null) {
++            root.rightMaxDistence = max(root.right.leftMaxDistence, root.right.rightMaxDistence);
++        }
++        if (root.leftMaxDistence + root.rightMaxDistence > maxDis) {
++            maxDis = root.leftMaxDistence + root.rightMaxDistence;
++        }
++        return maxDis;
++    }
++}
+Index: src/com/mahongchao/BinaryTree/TraversalTree.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/mahongchao/BinaryTree/TraversalTree.java	(date 1585128661591)
++++ src/com/mahongchao/BinaryTree/TraversalTree.java	(date 1585128661591)
+@@ -0,0 +1,90 @@
++package com.mahongchao.BinaryTree;
++
++import java.util.LinkedList;
++import java.util.Queue;
++
++public class TraversalTree {
++
++    /**
++     * 前序遍历二叉树
++     *
++     * @param localRoot
++     */
++    public void preOrder(Node localRoot) {
++        if (localRoot != null) {
++            System.out.print(localRoot.date + " ");
++            preOrder(localRoot.left);
++            preOrder(localRoot.right);
++        }
++    }
++
++    /**
++     * 中序遍历二叉树
++     *
++     * @param localRoot
++     */
++    public void inOrder(Node localRoot) {
++        if (localRoot != null) {
++            inOrder(localRoot.left);
++            System.out.print(localRoot.date + " ");
++            inOrder(localRoot.right);
++        }
++    }
++
++    /**
++     * 后序遍历二叉树
++     *
++     * @param localRoot
++     */
++    public void postOrder(Node localRoot) {
++        if (localRoot != null) {
++            postOrder(localRoot.left);
++            postOrder(localRoot.right);
++            System.out.print(localRoot.date + " ");
++        }
++    }
++
++    /**
++     * 层序遍历二叉树
++     */
++    public void layerOrder(Node localRoot) {
++        if (localRoot == null) {
++            return;
++        }
++        Queue<Node> queue = new LinkedList<Node>();
++        queue.add(localRoot);
++        while (!queue.isEmpty()) {
++            Node curNode = queue.poll();//返回第一个元素，并在队列中删除
++            System.out.print(curNode.date + " ");
++            if (curNode.left != null) {
++                queue.add(curNode.left);
++            }
++            if (curNode.right != null) {
++                queue.add(curNode.right);
++            }
++        }
++    }
++
++    public static void main(String[] args) {
++        TraversalTree traversalTree = new TraversalTree();
++
++        int a[] = {2, 8, 7, 4, 9, 3, 1, 6, 7, 5};
++        BinaryTree binaryTree = new BinaryTree();
++        binaryTree.buildTree(a);
++
++        System.out.println("前序遍历二叉树：");
++        traversalTree.preOrder(binaryTree.getRoot());
++
++        System.out.println();
++        System.out.println("中序遍历二叉树：");
++        traversalTree.inOrder(binaryTree.getRoot());
++
++        System.out.println();
++        System.out.println("后序遍历二叉树：");
++        traversalTree.postOrder(binaryTree.getRoot());
++
++        System.out.println();
++        System.out.println("层序遍历二叉树：");
++        traversalTree.layerOrder(binaryTree.getRoot());
++    }
++}
+Index: src/com/mahongchao/BinaryTree/KnowPreAndInToPost.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/mahongchao/BinaryTree/KnowPreAndInToPost.java	(date 1584170981134)
++++ src/com/mahongchao/BinaryTree/KnowPreAndInToPost.java	(date 1584170981134)
+@@ -0,0 +1,59 @@
++package com.mahongchao.BinaryTree;
++
++/**
++ * 已二叉树前序遍历和中序遍历，求后序遍历
++ */
++public class KnowPreAndInToPost {
++    BinaryTree binaryTree = new BinaryTree();
++
++    private BinaryTree initTree(int[] preOrder, int[] inOrder) {
++        binaryTree.setRoot(this.initTree(preOrder, 0, preOrder.length - 1, inOrder, 0, inOrder.length - 1));
++        return binaryTree;
++    }
++
++    private Node initTree(int[] preOrder, int start1, int end1, int[] inOrder, int start2, int end2) {
++        if (start1 > end1 || start2 > end2) {
++            return null;
++        }
++        int rootDate = preOrder[start1];
++        Node head = new Node(rootDate);//根或子根
++        int rootIndex = findIndexInArray(inOrder, rootDate, start2, end2);//找到中序遍历的根位置
++        int offSet = rootIndex - start2 - 1;//中序左子树结束位置
++        //创建左子树
++        Node left = initTree(preOrder, start1 + 1, start1 + 1 + offSet, inOrder, start2, start2 + offSet);
++        //创建右子树
++        Node right = initTree(preOrder, start1 + offSet + 2, end1, inOrder, rootIndex + 1, end2);
++
++        head.left = left;
++        head.right = right;
++        return head;
++    }
++
++    /**
++     * 找到date在数组中的位置
++     *
++     * @param a
++     * @param date
++     * @return
++     */
++    private int findIndexInArray(int a[], int date, int start, int end) {
++        for (int i = start; i <= end; i++) {
++            if (date == a[i]) {
++                return i;
++            }
++        }
++        return -1;
++    }
++
++    public static void main(String[] args) {
++        int preOrder[] = {1, 2, 4, 8, 9, 5, 10, 3, 6, 7};//前序遍历
++        int inOrder[] = {8, 4, 9, 2, 10, 5, 1, 6, 3, 7};//中序遍历
++
++        KnowPreAndInToPost preAndInToPost = new KnowPreAndInToPost();
++        BinaryTree binaryTree = preAndInToPost.initTree(preOrder, inOrder);
++
++        TraversalTree traversalTree = new TraversalTree();//遍历类
++        System.out.println("后序遍历：");
++        traversalTree.postOrder(binaryTree.getRoot());//后序遍历
++    }
++}
+Index: src/com/mahongchao/BinaryTree/Node.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/mahongchao/BinaryTree/Node.java	(date 1584171818268)
++++ src/com/mahongchao/BinaryTree/Node.java	(date 1584171818268)
+@@ -0,0 +1,18 @@
++package com.mahongchao.BinaryTree;
++
++/**
++ * 二叉树结点
++ */
++public class Node {
++    public int date;
++    public Node left;
++    public Node right;
++    public int leftMaxDistence;
++    public int rightMaxDistence;
++
++    public Node(int date) {
++        this.date = date;
++        this.left = null;
++        this.right = null;
++    }
++}
+Index: src/com/mahongchao/BinaryTree/BinaryTree.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/mahongchao/BinaryTree/BinaryTree.java	(date 1584167004035)
++++ src/com/mahongchao/BinaryTree/BinaryTree.java	(date 1584167004035)
+@@ -0,0 +1,64 @@
++package com.mahongchao.BinaryTree;
++
++/**
++ * 二叉树
++ */
++public class BinaryTree {
++    private Node root;//根节点
++
++    public Node getRoot() {
++        return this.root;
++    }
++
++    public void setRoot(Node root) {
++        this.root = root;
++    }
++
++    public BinaryTree() {
++        root = null;
++    }
++
++    /**
++     * date插入到二叉树
++     *
++     * @param date
++     */
++    public void insert(int date) {
++        Node newNode = new Node(date);
++        if (root == null) {
++            root = newNode;
++        } else {
++            Node curNode = root;
++            Node parentNode;
++            while (true) {
++                parentNode = curNode;
++                if (date < curNode.date) {//数据比当前节点数据小，当前节点往后移
++                    curNode = curNode.left;
++                    if (curNode == null) {
++                        parentNode.left = newNode;//添加
++                        return;
++                    }
++                } else {//数据比当前节点数据大
++                    curNode = curNode.right;
++                    if (curNode == null) {
++                        parentNode.right = newNode;//添加
++                        return;
++                    }
++                }
++            }
++        }
++    }
++
++    /**
++     * 插入数据，构建二叉树
++     *
++     * @param a
++     */
++    public void buildTree(int a[]) {
++        for (int i = 0; i < a.length; i++) {
++            insert(a[i]);
++        }
++    }
++
++
++}
+Index: src/com/mahongchao/String/WordCount.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/mahongchao/String/WordCount.java	(date 1584011732316)
++++ src/com/mahongchao/String/WordCount.java	(date 1584011732316)
+@@ -0,0 +1,28 @@
++package com.mahongchao.String;
++
++/**
++ * 字符串中单词的数量
++ */
++public class WordCount {
++    private static int count(String s) {
++        char[] sChars = s.toCharArray();
++        int count = 0;
++        for (int i = 1; i < sChars.length; i++) {
++            if (sChars[i] != ' ' && sChars[i - 1] == ' ') {
++                count++;
++            }
++        }
++        return count;
++    }
++
++    public static void main(String[] args) {
++        String s = " my name is  MaHongchao ";
++        System.out.println(count(s));
++
++
++        /*char[] sChars = s.toCharArray();
++        for (int i = 0; i < sChars.length; i++) {
++            System.out.println(sChars[i]);
++        }*/
++    }
++}
+Index: src/com/mahongchao/String/FullSort.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/mahongchao/String/FullSort.java	(date 1584082764585)
++++ src/com/mahongchao/String/FullSort.java	(date 1584082764585)
+@@ -0,0 +1,46 @@
++package com.mahongchao.String;
++
++/**
++ * 字符串元素的全排列
++ */
++public class FullSort {
++    /**
++     * 交换
++     *
++     * @param a
++     * @param i
++     * @param j
++     */
++    private static void swap(char a[], int i, int j) {
++        char t = a[i];
++        a[i] = a[j];
++        a[j] = t;
++    }
++
++    /**
++     * 全排列
++     *
++     * @param a
++     * @param start
++     * @param end
++     */
++    private static void fullSort(char a[], int start, int end) {
++        if (start == end) {
++            for (char m : a) {
++                System.out.print(m + " ");
++            }
++            System.out.println();
++        }
++        for (int i = start; i <= end; i++) {
++            swap(a, start, i);
++            fullSort(a, start + 1, end);//递归
++            swap(a, start, i);
++        }
++    }
++
++    public static void main(String[] args) {
++        String s = "abc";
++        char[] chars = s.toCharArray();
++        fullSort(chars, 0, chars.length - 1);
++    }
++}
+Index: src/com/mahongchao/String/DeleteDuplicate.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/mahongchao/String/DeleteDuplicate.java	(date 1584002512493)
++++ src/com/mahongchao/String/DeleteDuplicate.java	(date 1584002512493)
+@@ -0,0 +1,50 @@
++package com.mahongchao.String;
++
++/**
++ * 删除字符串中重复的字符
++ */
++public class DeleteDuplicate {
++    /**
++     * 蛮力法
++     *
++     * @param s
++     * @return
++     */
++    private static String delete1(String s) {
++        char[] sChars = s.toCharArray();
++        int l = 0;
++        for (int i = 0; i < sChars.length; i++) {
++            if (sChars[i] == '\0') {
++                continue;
++            }
++            for (int j = i + 1; j < sChars.length; j++) {
++                if (sChars[i] == sChars[j]) {
++                    sChars[j] = '\0';
++                }
++            }
++        }
++        for (int i = 0; i < sChars.length; i++) {
++            if (sChars[i] != '\0') {
++                sChars[l] = sChars[i];
++                l++;
++            }
++        }
++        return new String(sChars, 0, l);
++    }
++
++    /**
++     * 空间换时间
++     *
++     * @param s
++     * @return
++     */
++    private static String delete2(String s) {
++        return null;
++    }
++
++    public static void main(String[] args) {
++        String s = "abacbc";
++        String s1 = delete1(s);
++        System.out.println(s1);
++    }
++}
+Index: src/com/mahongchao/String/CompareString.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/mahongchao/String/CompareString.java	(date 1585121236168)
++++ src/com/mahongchao/String/CompareString.java	(date 1585121236168)
+@@ -0,0 +1,73 @@
++package com.mahongchao.String;
++
++import java.util.Arrays;
++
++/**
++ * 比较两个字符串构成元素是否相同
++ */
++public class CompareString {
++    /**
++     * 排序法
++     *
++     * @param a
++     * @param b
++     * @return
++     */
++    private static boolean compare1(String a, String b) {
++        byte[] aBytes = a.getBytes();
++        byte[] bBytes = b.getBytes();
++        Arrays.sort(aBytes);
++        Arrays.sort(bBytes);
++        a = new String(aBytes);
++        b = new String(bBytes);
++        if (a.equals(b)) {
++            return true;
++        }
++        return false;
++    }
++
++    /**
++     * ASCII码比较：ASCII码作为count的下标
++     *
++     * @param a
++     * @param b
++     * @return
++     */
++    private static boolean compare2(String a, String b) {
++        byte[] aBytes = a.getBytes();
++        byte[] bBytes = b.getBytes();
++        int[] count = new int[256];
++        for (int i = 0; i < aBytes.length; i++) {
++            count[aBytes[i]]++;
++        }
++        for (int j = 0; j < bBytes.length; j++) {
++            count[bBytes[j]]--;
++        }
++        for (int m = count.length - 1; m >= 0; m--) {
++            if (count[m] != 0) { //不相同的下标不为0，相同的下标都为0
++                return false;
++            }
++        }
++        return true;
++    }
++
++    public static void main(String[] args) {
++        String a = "aa bb cc";
++        String b = "a bcab c";
++        if (compare1(a, b)) {
++            System.out.println("相同");
++        } else {
++            System.out.println("不相同");
++        }
++        if (compare2(a, b)) {
++            System.out.println("相同");
++        } else {
++            System.out.println("不相同");
++        }
++
++        /*byte[] bytes = a.getBytes();
++        for (int i = 0; i < bytes.length; i++) {
++            System.out.println(bytes[i]);
++        }*/
++    }
++}
+Index: src/com/mahongchao/String/SwapString.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/mahongchao/String/SwapString.java	(date 1583980585885)
++++ src/com/mahongchao/String/SwapString.java	(date 1583980585885)
+@@ -0,0 +1,37 @@
++package com.mahongchao.String;
++
++/**
++ * 字符串反转,单词反转
++ */
++public class SwapString {
++    private static void allSwap(char[] a, int i, int j) {
++        while (i < j) {
++            char t = a[i];
++            a[i] = a[j];
++            a[j] = t;
++            i++;
++            j--;
++        }
++    }
++
++    private static String swap(String a) {
++        char[] aChars = a.toCharArray();
++        allSwap(aChars, 0, aChars.length - 1);
++        int begin = 0;
++        for (int i = 0; i < aChars.length; i++) {
++            if (aChars[i] == ' ') {
++                allSwap(aChars, begin, i - 1);
++                begin = i + 1;
++            }
++        }
++        allSwap(aChars, begin, a.length() - 1);
++        return new String(aChars);
++    }
++
++
++    public static void main(String[] args) {
++        String s = "how are you";
++        String s1 = swap(s);
++        System.out.println(s1);
++    }
++}
+Index: .idea/vcs.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/vcs.xml	(date 1588419870964)
++++ .idea/vcs.xml	(date 1588419870964)
+@@ -0,0 +1,6 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="VcsDirectoryMappings">
++    <mapping directory="$PROJECT_DIR$" vcs="Git" />
++  </component>
++</project>
+\ No newline at end of file
+Index: src/com/mahongchao/array/IsContinuous.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/mahongchao/array/IsContinuous.java	(date 1583919024285)
++++ src/com/mahongchao/array/IsContinuous.java	(date 1583919024285)
+@@ -0,0 +1,36 @@
++package com.mahongchao.array;
++
++/**
++ * 判断给定数组元素是否是连续的
++ */
++public class IsContinuous {
++    private static boolean isContinuous(int a[]) {
++        int l = a.length;
++        int min = -1, max = -1;
++        for (int i = 0; i < a.length; i++) {
++            if (a[i] != 0) {
++                if (a[i] <= min || min == -1) {
++                    min = a[i];
++                }
++                if (a[i] >= max || max == -1) {
++                    max = a[i];
++                }
++            }
++        }
++        if (max - min <= l - 1) {
++            return true;
++        } else {
++            return false;
++        }
++    }
++
++    public static void main(String[] args) {
++        int a[] = {0, 5, 7, 9, 6, 8, 12};
++        if (isContinuous(a)) {
++            System.out.println("数组是连续的");
++        } else {
++            System.out.println("数组不是连续的");
++        }
++
++    }
++}
+Index: src/com/mahongchao/array/MinimumTernaryDistance.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/mahongchao/array/MinimumTernaryDistance.java	(date 1585118724688)
++++ src/com/mahongchao/array/MinimumTernaryDistance.java	(date 1585118724688)
+@@ -0,0 +1,85 @@
++package com.mahongchao.array;
++
++/**
++ * 最小三元法距离：三个升序数组，各取一个元素，max(Math.abs(a[i] - b[j]), Math.abs(a[i] - c[k]), Math.abs(b[j] - c[k]))
++ */
++public class MinimumTernaryDistance {
++    private static int min(int a, int b, int c) {
++        int min = a < b ? a : b;
++        min = min < c ? min : c;
++        return min;
++    }
++
++    private static int max(int a, int b, int c) {
++        int max = a > b ? a : b;
++        max = max > c ? max : c;
++        return max;
++    }
++
++    /**
++     * 最小距离法
++     * @param a
++     * @param b
++     * @param c
++     * @return
++     */
++    private static int minDistence1(int a[], int b[], int c[]) {
++        int i = 0, j = 0, k = 0, curDis, minDis = Integer.MAX_VALUE, min;
++        while (true) {
++            curDis = max(Math.abs(a[i] - b[j]), Math.abs(a[i] - c[k]), Math.abs(b[j] - c[k]));//三元组距离
++            if (curDis < minDis) {
++                minDis = curDis;
++            }
++            min = min(a[i], b[j], c[k]);
++            if (min == a[i]) {
++                i++;
++                if (i >= a.length) {
++                    break;
++                }
++            } else if (min == b[j]) {
++                j++;
++                if (j >= b.length) {
++                    break;
++                }
++            } else {
++                k++;
++                if (k >= c.length) {
++                    break;
++                }
++            }
++        }
++        return minDis;
++    }
++
++    /**
++     * 暴力法
++     * @param a
++     * @param b
++     * @param c
++     * @return
++     */
++    private static int minDistence2(int a[], int b[], int c[]) {
++        int curDis, minDis = Integer.MAX_VALUE;
++        for (int i = 0; i < a.length; i++) {
++            for (int j = 0; j < b.length; j++) {
++                for (int k = 0; k < c.length; k++) {
++                    curDis = max(Math.abs(a[i] - b[j]), Math.abs(a[i] - c[k]), Math.abs(b[j] - c[k]));//三元组距离
++                    if (curDis < minDis) {
++                        minDis = curDis;
++                    }
++                }
++            }
++        }
++        return minDis;
++    }
++
++    public static void main(String[] args) {
++        int a[] = {3, 4, 5, 10, 11, 12};
++        int b[] = {9, 12, 14, 16, 17};
++        int c[] = {18, 21, 22, 23, 24, 37, 39};
++        int x = minDistence1(a, b, c);
++        int y = minDistence1(a, b, c);
++        System.out.println(x);
++        System.out.println(y);
++    }
++}
+Index: src/com/mahongchao/array/OrderedArrayMerge.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/mahongchao/array/OrderedArrayMerge.java	(date 1583902055033)
++++ src/com/mahongchao/array/OrderedArrayMerge.java	(date 1583902055033)
+@@ -0,0 +1,52 @@
++package com.mahongchao.array;
++
++/**
++ * 两个有序子序列合并
++ */
++public class OrderedArrayMerge {
++    /**
++     * mid位交换后，进行后段排序
++     *
++     * @param a
++     * @param mid
++     */
++    private static void arrayMerge(int a[], int mid) {
++        for (int i = mid; i < a.length - 1; i++) {
++            if (a[i] > a[i + 1]) {
++                int t = a[i + 1];
++                a[i + 1] = a[i];
++                a[i] = t;
++            }
++        }
++    }
++
++    /**
++     * 先进行mid位与前段的比较，再进行后段排序
++     *
++     * @param a
++     * @param mid
++     */
++    private static void midSort(int a[], int mid) {
++        for (int i = 0; i < mid; i++) {
++            if (a[i] > a[mid]) {
++                int t = a[i];
++                a[i] = a[mid];
++                a[mid] = t;
++                arrayMerge(a, mid);
++            }
++        }
++
++        for (int i = 0; i < a.length; i++) {
++            if (i != a.length - 1) {
++                System.out.print(a[i] + ",");
++            } else {
++                System.out.print(a[i] + "\n");
++            }
++        }
++    }
++
++    public static void main(String[] args) {
++        int a[] = {1, 3, 5, 6, 7, 9, 11, 14, 2, 4, 8, 10, 12, 13};
++        midSort(a, 8);
++    }
++}
+Index: src/com/mahongchao/array/mixed.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/mahongchao/array/mixed.java	(date 1585117732038)
++++ src/com/mahongchao/array/mixed.java	(date 1585117732038)
+@@ -0,0 +1,99 @@
++package com.mahongchao.array;
++
++import java.util.ArrayList;
++import java.util.List;
++
++/**
++ * 查询两个数组的交集
++ */
++public class mixed {
++    /**
++     * 两个有序数组长度相当
++     *
++     * @param a
++     * @param b
++     */
++
++    private static List findMixed1(int a[], int b[]) {
++        int i = 0, j = 0;
++        List list = new ArrayList<>();
++        while (i < a.length && j < b.length) {
++            if (a[i] == b[j]) {
++                list.add(a[i]);
++                i++;
++                j++;
++            } else if (a[i] > b[j]) {
++                j++;
++            } else {
++                i++;
++            }
++        }
++        return list;
++    }
++
++    /**
++     * 两个有序数组长度差异大
++     *
++     * @param a 长度较小
++     * @param b 长度较大
++     */
++    private static List findMixed2(int a[], int b[]) {
++        List list = new ArrayList<>();
++        if (a[0] > b[b.length - 1] || a[a.length - 1] < b[0]) {
++            return null;
++        }
++        for (int i = 0; i < a.length; i++) {
++            int low = 0, high = b.length - 1, mid;
++            while (low <= high) {
++                mid = low + (high - low) / 2;
++                if (a[i] == b[mid]) {
++                    list.add(a[i]);
++                    break;//找到后一定要跳出循环，不然造成死循环
++                } else if (a[i] > b[mid]) {
++                    low = mid + 1;
++                } else {
++                    high = mid - 1;
++                }
++            }
++        }
++        return list;
++    }
++
++    /**
++     * 暴力法
++     *
++     * @param a
++     * @param b
++     */
++    private static List findMixed3(int a[], int b[]) {
++        List list = new ArrayList<>();
++        for (int i = 0; i < a.length; i++) {
++            for (int j = 0; j < b.length; j++) {
++                if (a[i] == b[j]) {
++                    list.add(a[i]);
++                }
++            }
++        }
++        return list;
++    }
++
++    public static void main(String[] args) {
++        int a[] = {1, 2, 3, 4, 5};
++        int b[] = {2, 3, 5, 6, 8, 9};
++        int c[] = {0, 1, 3, 5, 6, 8, 9, 10, 11, 12, 15};
++
++        List list1 = findMixed1(a, b);
++        System.out.println("数组差异小：" + list1);
++
++        if (b.length < c.length) {
++            List list2 = findMixed2(b, c);
++            System.out.println("数组差异大：" + list2);
++        } else {
++            List list2 = findMixed2(c, b);
++            System.out.println("数组差异大：" + list2);
++        }
++
++        List list3 = findMixed3(a, b);
++        System.out.println("暴力法：" + list3);
++    }
++}
+Index: src/com/mahongchao/array/minDistenceInArray.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/mahongchao/array/minDistenceInArray.java	(date 1583653561546)
++++ src/com/mahongchao/array/minDistenceInArray.java	(date 1583653561546)
+@@ -0,0 +1,30 @@
++package com.mahongchao.array;
++
++/**
++ * 找到数组中两个数间的最短距离
++ */
++public class minDistenceInArray {
++    private static void minDistence(int a[], int x, int y) {
++        int distence = 0, minDis = Integer.MAX_VALUE, p = 0, q = 0;
++        for (int i = 0; i < a.length; i++) {
++            if (a[i] == x) {
++                p = i + 1;
++            }
++            if (a[i] == y) {
++                q = i + 1;
++            }
++            if (p <= a.length && q <= a.length && p != 0 && q != 0) {
++                distence = Math.abs(q - p);//绝对值
++                if (distence < minDis) {
++                    minDis = distence;
++                }
++            }
++        }
++        System.out.println(x + "与" + y + "的最小距离为：" + minDis);
++    }
++
++    public static void main(String[] args) {
++        int a[] = {4, 5, 6, 4, 7, 4, 6, 4, 7, 8, 5, 6, 4, 3, 4, 8};
++        minDistence(a, 4, 5);
++    }
++}
+Index: src/com/mahongchao/array/findIndex.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/mahongchao/array/findIndex.java	(date 1583892963512)
++++ src/com/mahongchao/array/findIndex.java	(date 1583892963512)
+@@ -0,0 +1,36 @@
++package com.mahongchao.array;
++
++/**
++ * 数组相邻元素之差都为1，求给定数字在数组中的位置
++ */
++public class findIndex {
++    private static void find1(int a[], int k) {
++        int i = 0, x = 0;
++        while (i < a.length) {
++            if (a[i] == k) {
++                x = i;
++                break;
++            } else {
++                i = i + Math.abs(a[i] - k);
++            }
++        }
++        System.out.println("位置为：a[" + x + "]");
++    }
++
++    private static void find2(int a[], int k) {
++        int x = 0;
++        for (int i = 0; i < a.length; i++) {
++            if (a[i] == k) {
++                x = i;
++                break;
++            }
++        }
++        System.out.println("位置为：a[" + x + "]");
++    }
++
++    public static void main(String[] args) {
++        int a[] = {-1, 0, 1, 2, 1, 0, -1, -2};
++        find1(a, -2);
++        find2(a, -2);
++    }
++}
+Index: src/com/mahongchao/array/diGuiFindMaxInArray.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/mahongchao/array/diGuiFindMaxInArray.java	(date 1583569125787)
++++ src/com/mahongchao/array/diGuiFindMaxInArray.java	(date 1583569125787)
+@@ -0,0 +1,26 @@
++package com.mahongchao.array;
++
++/**
++ * 递归法求数组的最大值
++ */
++public class diGuiFindMaxInArray {
++
++    private static int max(int a, int b) {
++        return a > b ? a : b;
++    }
++
++    private static int findMax(int a[], int begin) {
++        int l = a.length - begin;
++        if (l == 1) {
++            return a[begin];
++        } else {
++            return max(a[begin], findMax(a, begin + 1));
++        }
++    }
++
++    public static void main(String[] args) {
++        int a[] = {1, 2, 3, 4, 5};
++        int x = findMax(a, 0);
++        System.out.println("数组中最大值为：" + x);
++    }
++}
+Index: src/com/mahongchao/array/getMinAbsoluteValue.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/mahongchao/array/getMinAbsoluteValue.java	(date 1585115203919)
++++ src/com/mahongchao/array/getMinAbsoluteValue.java	(date 1585115203919)
+@@ -0,0 +1,52 @@
++package com.mahongchao.array;
++
++/**
++ * 找到数组中绝对值最小的元素
++ */
++public class getMinAbsoluteValue {
++    private static void findMinAbsolute(int a[]) {
++        int x = a[0], min, t = 0;
++        if (a[0] <= 0) {
++            min = -a[0];
++        } else {
++            min = a[0];
++        }
++        for (int i = 1; i < a.length; i++) {
++            t = Math.abs(a[i]);//绝对值
++            if (min > t) {
++                min = t;
++                x = a[i];
++            }
++        }
++        System.out.println("数组中绝对值最小的元素:" + x);
++    }
++
++    /**
++     * 有序数组
++     * @param a
++     */
++    private static void findMinAbsolute2(int a[]) {
++        int mid = a.length / 2;
++        if (a[mid] == 0) {
++            System.out.println("绝对值最小为：" + a[mid]);
++        } else if (a[mid] < 0) {
++            if (Math.abs(a[mid]) < Math.abs(a[mid + 1])) {
++                System.out.println("绝对值最小为：" + a[mid]);
++            } else {
++                System.out.println("绝对值最小为：" + a[mid + 1]);
++            }
++        } else {
++            if (Math.abs(a[mid]) < Math.abs(a[mid - 1])) {
++                System.out.println("绝对值最小为：" + a[mid]);
++            } else {
++                System.out.println("绝对值最小为：" + a[mid - 1]);
++            }
++        }
++    }
++
++    public static void main(String[] args) {
++        int a[] = {-4, -2, -1, 2, 3, 4};
++        //findMinAbsolute(a);
++        findMinAbsolute2(a);
++    }
++}
+Index: src/com/mahongchao/array/getKMinInArray.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/mahongchao/array/getKMinInArray.java	(date 1583553018727)
++++ src/com/mahongchao/array/getKMinInArray.java	(date 1583553018727)
+@@ -0,0 +1,76 @@
++package com.mahongchao.array;
++
++/**
++ * 找到数组中第K小的元素
++ */
++public class getKMinInArray {
++    /**
++     * 排序法，找到对应小元素
++     *
++     * @param a
++     * @param k
++     */
++    private static void getKMin1(int a[], int k) {
++
++    }
++
++    /**
++     * 剪枝法，找到对应小元素（比排序法效率高）
++     *
++     * @param a
++     * @param k
++     */
++    private static void getKMin2(int a[], int k) {
++        if (k <= a.length) {
++            int x = quickSort(a, 0, a.length - 1, k);
++            System.out.println("第" + k + "小的数：" + x);
++        } else {
++            System.out.println("超出数组范围");
++        }
++    }
++
++    /**
++     * 将数组分为小于大于基准数的前后两部分
++     *
++     * @param a
++     * @param low
++     * @param high
++     * @param k
++     * @return
++     */
++    private static int quickSort(int a[], int low, int high, int k) {
++        int i, j, temp;
++        temp = a[low];
++        i = low;//左边坐标
++        j = high;//右边坐标
++        while (i < j) {
++            while (i < j && a[j] > temp) {//右边找到小于基准位的停止a[j] < temp
++                j--;
++            }
++            while (i < j && a[i] <= temp) {//左边找到大于基准位的值停止a[i] >= temp
++                i++;
++            }
++            if (i < j) {//左右位置大小数互换
++                int t = a[i];
++                a[i] = a[j];
++                a[j] = t;
++            }
++        }
++        //基准位与i互换i=j
++        a[low] = a[i];
++        a[i] = temp;
++
++        if (i == k - 1) {//等于第K小
++            return a[i];
++        } else if (i < k - 1) {//第K小在右边
++            return quickSort(a, i + 1, high, k);
++        } else {//i>k-1 第K小在左边
++            return quickSort(a, low, i - 1, k);
++        }
++    }
++
++    public static void main(String[] args) {
++        int a[] = {7, 9, 3, 4, 5};
++        getKMin2(a, 5);
++    }
++}
+Index: src/guanglianda/Main4.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/guanglianda/Main4.java	(date 1588144271185)
++++ src/guanglianda/Main4.java	(date 1588144271185)
+@@ -0,0 +1,17 @@
++package guanglianda;
++
++import java.util.Scanner;
++
++public class Main4 {
++    public static void test(String s) {
++
++    }
++
++    public static void main(String[] args) {
++        Scanner scanner = new Scanner(System.in);
++        while (scanner.hasNext()) {
++            String s = scanner.nextLine();
++            test(s);
++        }
++    }
++}
+Index: src/guanglianda/test.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/guanglianda/test.java	(date 1588418931670)
++++ src/guanglianda/test.java	(date 1588418931670)
+@@ -0,0 +1,15 @@
++package guanglianda;
++
++public class test {
++    public static void main(String[] args) throws InterruptedException {
++        System.out.println("1....");
++        Thread.sleep(30000);
++        byte[] array = new byte[1024 * 1024 * 10];//10M
++        System.out.println("2....");
++        Thread.sleep(30000);
++        array = null;//array没有引用，可以被回收了
++        System.gc();
++        System.out.println("3...");
++        Thread.sleep(1000000L);
++    }
++}
+Index: src/guanglianda/Main2.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/guanglianda/Main2.java	(date 1588418941650)
++++ src/guanglianda/Main2.java	(date 1588418941650)
+@@ -0,0 +1,0 @@
+Index: src/guanglianda/Main3.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/guanglianda/Main3.java	(date 1588144271185)
++++ src/guanglianda/Main3.java	(date 1588144271185)
+@@ -0,0 +1,17 @@
++package guanglianda;
++
++import java.util.Scanner;
++
++public class Main3 {
++    public static void test(String s) {
++
++    }
++
++    public static void main(String[] args) {
++        Scanner scanner = new Scanner(System.in);
++        while (scanner.hasNext()) {
++            String s = scanner.nextLine();
++            test(s);
++        }
++    }
++}
+Index: src/guanglianda/Main1.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/guanglianda/Main1.java	(date 1588148053608)
++++ src/guanglianda/Main1.java	(date 1588148053608)
+@@ -0,0 +1,50 @@
++package guanglianda;
++
++import java.util.ArrayList;
++import java.util.List;
++import java.util.TreeMap;
++
++public class Main1 {
++    public static List test(int[] a) {
++        TreeMap<Integer, List<Integer>> map = new TreeMap<>();
++        List<Integer> res = new ArrayList();
++        for (int i = 0; i < a.length; i++) {
++            int count = NumberOf1(a[i]);
++            if (map.containsKey(count)) {
++                List l = map.get(count);
++                l.add(a[i]);
++                map.put(count, l);
++            } else {
++                List<Integer> list = new ArrayList();
++                list.add(a[i]);
++                map.put(count, list);
++            }
++        }
++        for (Integer key : map.keySet()) {
++            List<Integer> list = map.get(key);
++            for (Integer integer : list) {
++                res.add(integer);
++            }
++        }
++
++        return res;
++    }
++
++    public static int NumberOf1(int n) {
++        int count = 0;
++        char[] c = Integer.toBinaryString(n).toCharArray();
++        for (int i = 0; i < c.length; i++) {
++            if (c[i] == '1') {
++                count++;
++            }
++        }
++        return count;
++    }
++
++    public static void main(String[] args) {
++        int a[] = {2,3,5,7,11,13,17,19};
++        List list = test(a);
++        System.out.println(list);
++
++    }
++}
+Index: src/tengxun/Main3.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/tengxun/Main3.java	(date 1587889327903)
++++ src/tengxun/Main3.java	(date 1587889327903)
+@@ -0,0 +1,17 @@
++package tengxun;
++
++import java.util.Scanner;
++
++public class Main3 {
++    public static void test(String s) {
++
++    }
++
++    public static void main(String[] args) {
++        Scanner scanner = new Scanner(System.in);
++        while (scanner.hasNext()) {
++            String s = scanner.nextLine();
++            test(s);
++        }
++    }
++}
+Index: src/tengxun/Main4.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/tengxun/Main4.java	(date 1587908625323)
++++ src/tengxun/Main4.java	(date 1587908625323)
+@@ -0,0 +1,56 @@
++package tengxun;
++
++import java.util.Scanner;
++import java.util.Stack;
++
++public class Main4 {
++    Stack<Integer> stack1 = new Stack<>();
++    Stack<Integer> stack2 = new Stack<>();
++
++    public void add(int a) {
++        stack1.push(a);
++    }
++
++    public int poll() {
++        while (!stack2.isEmpty()) {
++            return stack2.pop();
++        }
++        while (!stack1.isEmpty()) {
++            stack2.push(stack1.pop());
++        }
++        return stack2.pop();
++    }
++
++    public int peek() {
++        while (!stack2.isEmpty()) {
++            return stack2.peek();
++        }
++        while (!stack1.isEmpty()) {
++            stack2.push(stack1.pop());
++        }
++        return stack2.peek();
++    }
++
++
++    public static void main(String[] args) {
++        Main4 main = new Main4();
++        Scanner scanner = new Scanner(System.in);
++        while (scanner.hasNextLine()) {
++            String s = scanner.nextLine();
++            if (s.equals("")) {
++                break;
++            }
++            if (s.contains("add")) {
++                String[] s1 = s.split(" ");
++                main.add(Integer.valueOf(s1[1]));
++            } else if (s.contains("peek")) {
++                int peek = main.peek();
++                System.out.println(peek);
++            } else if (s.contains("poll")) {
++                int poll = main.poll();
++                //System.out.println(poll);
++            }
++        }
++
++    }
++}
+Index: src/tengxun/Main1.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/tengxun/Main1.java	(date 1587909540016)
++++ src/tengxun/Main1.java	(date 1587909540016)
+@@ -0,0 +1,83 @@
++package tengxun;
++
++import java.util.PriorityQueue;
++import java.util.Queue;
++import java.util.Scanner;
++
++public class Main1 {
++    Queue<Integer> queue = new PriorityQueue();
++
++    public void test(String s, int a) {
++        if (s.contains("PUSH")) {
++            PUSH(a);
++        }
++        if (s.contains("TOP")) {
++            int x = TOP();
++            System.out.println(x);
++        }
++        if (s.contains("POP")) {
++            if (queue.size() == 0) {
++                System.out.println(-1);
++            }
++            POP();
++        }
++        if (s.contains("SIZE")) {
++            int size = SIZE();
++            System.out.println(size);
++        }
++        if (s.contains("CLEAR")) {
++            CLEAR();
++        }
++    }
++
++    //插入队尾
++    public void PUSH(int a) {
++        queue.add(a);
++    }
++
++    //取出队首
++    public int TOP() {
++        if (queue.size() == 0) {
++            return -1;
++        }
++        return queue.peek();
++    }
++
++    //删除队首
++    public void POP() {
++        queue.poll();
++    }
++
++    //大小
++    public int SIZE() {
++        return queue.size();
++    }
++
++    //清空
++    public void CLEAR() {
++        while (queue.size() > 0) {
++            queue.poll();
++        }
++    }
++
++    public static void main(String[] args) {
++        Main1 main = new Main1();
++        Scanner scanner = new Scanner(System.in);
++        int t = scanner.nextInt();
++        while (t > 0) {
++            int q = scanner.nextInt();
++            while (q > 0) {
++                String s = scanner.nextLine();
++                if (s.contains(" ")) {
++                    String[] s1 = s.split(" ");
++                    main.test(s1[0], Integer.valueOf(s1[1]));
++                } else {
++                    main.test(s, 0);
++                }
++                q--;
++            }
++            t--;
++        }
++
++    }
++}
+Index: src/tengxun/Main2.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/tengxun/Main2.java	(date 1587889300652)
++++ src/tengxun/Main2.java	(date 1587889300652)
+@@ -0,0 +1,17 @@
++package tengxun;
++
++import java.util.Scanner;
++
++public class Main2 {
++    public static void test(String s) {
++
++    }
++
++    public static void main(String[] args) {
++        Scanner scanner = new Scanner(System.in);
++        while (scanner.hasNext()) {
++            String s = scanner.nextLine();
++            test(s);
++        }
++    }
++}
+Index: src/meituan/Meituan11.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/meituan/Meituan11.java	(date 1587645722501)
++++ src/meituan/Meituan11.java	(date 1587645722501)
+@@ -0,0 +1,80 @@
++package meituan;
++
++import java.util.ArrayList;
++import java.util.Scanner;
++
++public class Meituan11 {
++    public static String Test(String f) {
++        if (!f.contains(".")) {
++            f = f + ".0";
++        }
++        boolean flag = false;
++        if (f.contains("-")) {
++            flag = true;
++            f = f.replace("-", "");
++        }
++        String[] s = String.valueOf(f).split("\\.");
++
++        char[] c = s[0].toCharArray();
++        char[] end = s[1].toCharArray();
++
++        String x = "";
++        String x1 = "";
++
++        if (c.length > 3) {
++            int num = 0;
++            for (int i = c.length - 1; i >= 0; i--) {
++                if (num == 3) {
++                    x += ",";
++                    num = 0;
++                }
++                x += c[i];
++                num++;
++            }
++            char[] c1 = x.toCharArray();
++            for (int j = c1.length - 1; j >= 0; j--) {
++                x1 += c1[j];
++            }
++        } else {
++            for (int i = 0; i < c.length; i++) {
++                x1 += c[i];
++            }
++        }
++
++        if (end.length > 2) {
++            x1 = "$" + x1 + ".";
++            for (int k = 0; k <= 1; k++) {
++                x1 += end[k];
++            }
++
++        } else {
++            x1 = "$" + x1 + ".";
++            for (int k = 0; k < end.length; k++) {
++                x1 += end[k];
++            }
++            x1 = x1 + "0";
++        }
++
++
++        if (flag == true) {
++            x1 = "(" + x1 + ")";
++        }
++        return x1;
++
++    }
++
++    public static void main(String[] args) {
++        Scanner scanner = new Scanner(System.in);
++        ArrayList<String> list = new ArrayList();
++        for (int i = 0; i < 100; i++) {
++            if (scanner.hasNext()) {
++                list.add(scanner.nextLine());
++            }
++        }
++        for (String s : list) {
++            String test = Test(s);
++            System.out.println(test);
++        }
++
++    }
++}
+Index: src/meituan/Meituan4.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/meituan/Meituan4.java	(date 1587643105908)
++++ src/meituan/Meituan4.java	(date 1587643105908)
+@@ -0,0 +1,15 @@
++package meituan;
++
++import java.util.Scanner;
++
++public class Meituan4 {
++    public static void Test() {
++
++    }
++
++    public static void main(String[] args) {
++        Scanner scanner = new Scanner(System.in);
++        String s = scanner.nextLine();
++
++    }
++}
+Index: src/meituan/Meituan5.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/meituan/Meituan5.java	(date 1587644139231)
++++ src/meituan/Meituan5.java	(date 1587644139231)
+@@ -0,0 +1,34 @@
++package meituan;
++
++import java.util.Scanner;
++
++public class Meituan5 {
++    public static void test(int[] a) {
++        for (int i = 0; i < a.length; i++) {
++            for (int j = i + 1; j < a.length; j++) {
++                if ((a[i] & a[j]) == 0) {
++                    a[i] = 1;
++                    continue;
++                }
++            }
++            if (a[i] != 1) {
++                a[i] = -1;
++            }
++        }
++        String res = "";
++        for (int i = 0; i < a.length; i++) {
++            res += a[i] + " ";
++        }
++        System.out.println(res.trim());
++    }
++
++    public static void main(String[] args) {
++        Scanner scanner = new Scanner(System.in);
++        int n = scanner.nextInt();
++        int[] a = new int[n];
++        for (int i = 0; i < a.length; i++) {
++            a[i] = scanner.nextInt();
++        }
++        test(a);
++    }
++}
+Index: src/meituan/Meituan2.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/meituan/Meituan2.java	(date 1587646424670)
++++ src/meituan/Meituan2.java	(date 1587646424670)
+@@ -0,0 +1,20 @@
++package meituan;
++
++import java.util.Scanner;
++
++public class Meituan2 {
++    public static void Test(int[][] a) {
++        int count = 0;
++        System.out.println(2);
++    }
++
++    public static void main(String[] args) {
++        Scanner scanner = new Scanner(System.in);
++        int hang = scanner.nextInt();
++        int[][] a = new int[8][];
++        for (int i = 0; i < a.length; i++) {
++            a[i][0] = scanner.nextInt();
++            a[i][1] = scanner.nextInt();
++        }
++    }
++}
+Index: .idea/inspectionProfiles/Project_Default.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/inspectionProfiles/Project_Default.xml	(date 1583497456249)
++++ .idea/inspectionProfiles/Project_Default.xml	(date 1583497456249)
+@@ -0,0 +1,36 @@
++<component name="InspectionProjectProfileManager">
++  <profile version="1.0">
++    <option name="myName" value="Project Default" />
++    <inspection_tool class="JavaDoc" enabled="false" level="WARNING" enabled_by_default="false">
++      <option name="TOP_LEVEL_CLASS_OPTIONS">
++        <value>
++          <option name="ACCESS_JAVADOC_REQUIRED_FOR" value="none" />
++          <option name="REQUIRED_TAGS" value="" />
++        </value>
++      </option>
++      <option name="INNER_CLASS_OPTIONS">
++        <value>
++          <option name="ACCESS_JAVADOC_REQUIRED_FOR" value="none" />
++          <option name="REQUIRED_TAGS" value="" />
++        </value>
++      </option>
++      <option name="METHOD_OPTIONS">
++        <value>
++          <option name="ACCESS_JAVADOC_REQUIRED_FOR" value="none" />
++          <option name="REQUIRED_TAGS" value="@return@param@throws or @exception" />
++        </value>
++      </option>
++      <option name="FIELD_OPTIONS">
++        <value>
++          <option name="ACCESS_JAVADOC_REQUIRED_FOR" value="none" />
++          <option name="REQUIRED_TAGS" value="" />
++        </value>
++      </option>
++      <option name="IGNORE_DEPRECATED" value="false" />
++      <option name="IGNORE_JAVADOC_PERIOD" value="true" />
++      <option name="IGNORE_DUPLICATED_THROWS" value="false" />
++      <option name="IGNORE_POINT_TO_ITSELF" value="false" />
++      <option name="myAdditionalJavadocTags" value="" />
++    </inspection_tool>
++  </profile>
++</component>
+\ No newline at end of file
+Index: src/meituan/Meituan3.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/meituan/Meituan3.java	(date 1587722188368)
++++ src/meituan/Meituan3.java	(date 1587722188368)
+@@ -0,0 +1,27 @@
++package meituan;
++
++import java.util.Scanner;
++
++public class Meituan3 {
++    public static int Test(String s) {
++        char[] c = s.toCharArray();
++        int i = 0, j = c.length - 1, count = 0;
++        while (i < j) {
++            if (c[i] == c[j]) {
++                i++;
++                j--;
++            } else {
++                count++;
++                j--;
++            }
++        }
++        return count;
++    }
++
++    public static void main(String[] args) {
++        Scanner scanner = new Scanner(System.in);
++
++        String s = scanner.nextLine();
++        System.out.println(Test(s));
++    }
++}
+Index: src/com/mahongchao/array/findSumEquleX.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/mahongchao/array/findSumEquleX.java	(date 1583499203561)
++++ src/com/mahongchao/array/findSumEquleX.java	(date 1583499203561)
+@@ -0,0 +1,61 @@
++package com.mahongchao.array;
++
++/**
++ * 找到数组中两个数的和为X的组合
++ */
++public class findSumEquleX {
++    /**
++     * 排序法(时间复杂度 = 排序法时间复杂度)
++     *
++     * @param a
++     * @param x
++     */
++    private static void findSum1(int a[], int x) {
++        //先排序 冒泡排序
++        for (int i = 0; i < a.length - 1; ++i) {
++            for (int j = a.length - 1; j > i; --j) {
++                if (a[j] < a[j - 1]) {
++                    int t = a[j - 1];
++                    a[j - 1] = a[j];
++                    a[j] = t;
++                }
++            }
++        }
++        int begin = 0, end = a.length - 1;
++        while (begin < end) {
++            if (a[begin] + a[end] < x) {
++                begin++;
++            } else if (a[begin] + a[end] > x) {
++                end--;
++            } else {
++                System.out.println(a[begin] + "+" + a[end] + "=" + x);
++                begin++;
++                end--;
++            }
++        }
++    }
++
++    /**
++     * 暴力法(两次循环，时间复杂度为O(n^2))
++     *
++     * @param a
++     * @param x
++     */
++    private static void findSum2(int a[], int x) {
++        //a[i]+a[j]=x
++        for (int i = 0; i < a.length; i++) {
++            for (int j = i + 1; j < a.length; j++) {
++                if (a[i] + a[j] == x) {
++                    System.out.println(a[i] + "+" + a[j] + "=" + x);
++                }
++            }
++        }
++    }
++
++    public static void main(String[] args) {
++        int a[] = {1, 18, 15, 5, 13, 7, 10, 10};
++        findSum2(a, 20);
++        System.out.println();
++        findSum1(a, 20);
++    }
++}
+Index: src/com/mahongchao/array/rightMoveK.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/mahongchao/array/rightMoveK.java	(date 1585051000472)
++++ src/com/mahongchao/array/rightMoveK.java	(date 1585051000472)
+@@ -0,0 +1,46 @@
++package com.mahongchao.array;
++
++/**
++ * 数组循环右移K位
++ */
++public class rightMoveK {
++    private static void rightMove(int a[], int k) {
++        int l = a.length;
++        int ks = 0;
++        if (k >= l) {
++            ks = k % l;//大于数组长度的移位，取余
++        }
++        reverse(a, 0, l - ks - 1);//前段逆序
++        reverse(a, l - ks, l - 1);//后段逆序
++        reverse(a, 0, l - 1);//总体逆序
++
++        System.out.println("右移" + k + "位" + ":");
++        for (int i = 0; i < l; i++) {
++            if (i != l - 1) {
++                System.out.print(a[i] + ",");
++            } else {
++                System.out.print(a[i] + "\n");
++            }
++        }
++    }
++
++    /**
++     * 逆序数组片段
++     *
++     * @param a
++     * @param start
++     * @param end
++     */
++    private static void reverse(int a[], int start, int end) {
++        for (; start < end; start++, end--) {
++            int t = a[start];
++            a[start] = a[end];
++            a[end] = t;
++        }
++    }
++
++    public static void main(String[] args) {
++        int a[] = {1, 2, 3, 4, 5, 6, 7, 8};
++        rightMove(a, 10);
++    }
++}
+Index: src/meituan/Meituan1.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/meituan/Meituan1.java	(date 1587644592267)
++++ src/meituan/Meituan1.java	(date 1587644592267)
+@@ -0,0 +1,68 @@
++package meituan;
++
++import java.util.Scanner;
++
++public class Meituan1 {
++    public static String Test(Double f) {
++        boolean flag = false;
++        if (f < 0) {
++            flag = true;
++            f = f * -1;
++        }
++        String[] s = String.valueOf(f).split("\\.");
++
++        char[] c = s[0].toCharArray();
++        char[] end = s[1].toCharArray();
++
++        String x = "";
++        String x1 = "";
++
++        if (c.length > 3) {
++            int num = 0;
++            for (int i = c.length - 1; i >= 0; i--) {
++                if (num == 3) {
++                    x += ",";
++                    num = 0;
++                }
++                x += c[i];
++                num++;
++            }
++            char[] c1 = x.toCharArray();
++            for (int j = c1.length - 1; j >= 0; j--) {
++                x1 += c1[j];
++            }
++        } else {
++            for (int i = 0; i < c.length; i++) {
++                x1 += c[i];
++            }
++        }
++
++        if (end.length > 2) {
++            x1 = "$" + x1 + ".";
++            for (int k = 0; k <= 1; k++) {
++                x1 += end[k];
++            }
++
++        } else {
++            x1 = "$" + x1 + ".";
++            for (int k = 0; k < end.length; k++) {
++                x1 += end[k];
++            }
++            x1 = x1 + "0";
++        }
++
++
++        if (flag == true) {
++            x1 = "(" + x1 + ")";
++        }
++        return x1;
++
++    }
++
++    public static void main(String[] args) {
++        Scanner scanner = new Scanner(System.in);
++        Double f = scanner.nextDouble();
++        String test = Test(f);
++        System.out.println(test);
++    }
++}
+Index: src/huawei/huawei3.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/huawei/huawei3.java	(date 1586955578636)
++++ src/huawei/huawei3.java	(date 1586955578636)
+@@ -0,0 +1,31 @@
++package huawei;
++
++import java.util.Scanner;
++
++public class huawei3 {
++    public static void test(String s1,String s2,String s3,String s4,String s5) {
++        String[] c1 = s1.split(" ");
++        String[] c2 = s1.split(" ");
++        String[] c3 = s1.split(" ");
++        String[] c4 = s1.split(" ");
++        String[] c5 = s1.split(" ");
++
++    }
++
++    public static void main(String[] args) {
++        Scanner scanner = new Scanner(System.in);
++        String s = scanner.nextLine();
++        String s1 = scanner.nextLine();
++        String s2 = scanner.nextLine();
++        String s3 = scanner.nextLine();
++        String s4 = scanner.nextLine();
++        String s5 = scanner.nextLine();
++
++    }
++}
++//5 2 3 1 0 0
++//1 20 2 3
++//2 30 3 4 5
++//3 50 4
++//4 60
++//5 80
+Index: src/huawei/h.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/huawei/h.java	(date 1587201106203)
++++ src/huawei/h.java	(date 1587201106203)
+@@ -0,0 +1,26 @@
++package huawei;
++
++import java.util.*;
++
++public class h {
++    public static int test(int coins[], int count) {
++        Arrays.sort(coins);
++        int sum = 0;
++        for (int i = coins.length - 1; i >= 0; i--) {
++            if (count % coins[i] == 0) {
++                return sum + (count / coins[i]);
++            }
++            int cishu = count / coins[i];
++            count = count - cishu * coins[i];
++            sum += cishu;
++        }
++        return sum;
++
++    }
++
++    public static void main(String[] args) {
++        int a[] = new int[]{1, 2, 5};
++
++        System.out.println(test(a, 100));
++    }
++}
+Index: src/huawei/huawei1.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/huawei/huawei1.java	(date 1586951440955)
++++ src/huawei/huawei1.java	(date 1586951440955)
+@@ -0,0 +1,67 @@
++package huawei;
++
++import java.util.ArrayList;
++import java.util.HashMap;
++import java.util.Map;
++import java.util.Scanner;
++
++public class huawei1 {
++    public static String test(String s) {
++        String x = s.replace(',', 'a');
++        char[] c = x.toCharArray();
++        for (int m = 0; m < c.length; m++) {
++            if (c[m] > 'a' || c[m] > 'A' || c[m] < 'z' || c[m] < 'Z') {
++                continue;
++            } else {
++                return "error.0001";
++            }
++        }
++
++        Map<String, Integer> map = new HashMap<>();
++        ArrayList<String> list = new ArrayList<>();
++        String[] a = s.split(",");
++        for (int i = 0; i < a.length; i++) {
++            if (map.containsKey(a[i])) {
++                map.put(a[i], map.get(a[i]) + 1);
++            } else {
++                map.put(a[i], 1);
++            }
++        }
++        int number = 0;
++        for (String name : map.keySet()) {
++            if (map.get(name) > number) {
++                number = map.get(name);
++            }
++        }
++        for (String name : map.keySet()) {
++            if (map.get(name) == number) {
++                list.add(name);
++            }
++        }
++
++        //shouzimu
++        char shouzimu = 'Z';
++        int length = 0;
++        String res = null;
++        if (list.size() == 1) {
++            return list.get(0);
++        } else {
++            for (String s1 : list) {
++                if (shouzimu > s1.toCharArray()[0]) {
++                    shouzimu = s1.toCharArray()[0];
++                    res = s1;
++                }
++            }
++        }
++        return res;
++    }
++
++    public static void main(String[] args) {
++        Scanner scanner = new Scanner(System.in);
++        String s = scanner.nextLine();
++        //Tom,Lily,Tom,Lucy,Lucy,Jack
++        String name = test(s);
++        System.out.println(name);
++
++    }
++}
+Index: src/huawei/huawei2.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/huawei/huawei2.java	(date 1586954526055)
++++ src/huawei/huawei2.java	(date 1586954526055)
+@@ -0,0 +1,43 @@
++package huawei;
++
++import java.util.ArrayList;
++import java.util.Scanner;
++
++public class huawei2 {
++    public static ArrayList<String> list = new ArrayList<>();
++
++    public static ArrayList test(String guanjianzi, String s[]) {
++        for (int i = 0; i < s.length; i++) {
++            String[] s1 = s[i].split("\\[");
++            if (guanjianzi.equals(s1[0])) {
++                String[] s2 = s1[1].split(",");
++                //ArrayList<String> list = new ArrayList();
++                String p = "";
++                for (int j = 0; j < s2.length; j++) {
++                    String[] s3 = s2[j].split("=");
++                    //list.add(s3[1] + " ");
++                    p += s3[1] + " ";
++                }
++                list.add(p.trim());
++            }
++        }
++        return list;
++    }
++
++    public static void main(String[] args) {
++        Scanner scanner = new Scanner(System.in);
++        String s = scanner.nextLine();
++        String[] s1 = s.split(" ");
++        String guanjianzi = s1[0];
++        String[] x = s1[1].split("],");
++        ArrayList list = test(guanjianzi, x);
++        if(list.size()<=0){
++            System.out.println("FAIL");
++        }else{
++            for (Object o : list) {
++                String[] split = o.toString().split("\\]");
++                System.out.println(split[0]);
++            }
++        }
++    }
++}
+Index: src/com/mahongchao/array/Sort.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/mahongchao/array/Sort.java	(date 1586004238766)
++++ src/com/mahongchao/array/Sort.java	(date 1586004238766)
+@@ -0,0 +1,306 @@
++package com.mahongchao.array;
++
++public class Sort {
++
++    /**
++     * 选择排序
++     *
++     * @param a
++     */
++    private static void selectSort(int[] a) {
++        int i, j;
++        int temp;
++        for (i = 0; i < a.length; i++) {
++            for (j = i + 1; j < a.length; j++) {
++                if (a[i] > a[j]) {
++                    temp = a[i];
++                    a[i] = a[j];
++                    a[j] = temp;
++                }
++            }
++        }
++    }
++
++
++    /**
++     * 插入排序
++     *
++     * @param a
++     */
++    private static void insertSort(int[] a) {
++        for (int i = 1; i < a.length; i++) {
++            int temp = a[i];
++            int j = i;
++            if (a[i - 1] > a[i]) {
++                while (j > 0 && a[j - 1] > temp) {
++                    a[j] = a[j - 1];
++                    j--;
++                }
++
++            }
++            a[j] = temp;
++        }
++
++    }
++
++
++    /**
++     * 冒泡排序
++     *
++     * @param a
++     */
++    private static void bubbleSort(int[] a) {
++        int temp;
++        for (int i = 0; i < a.length - 1; i++) {
++            for (int j = 0; j < a.length - 1 - i; j++) {// -i除去最后一位数(已经最大值)
++                if (a[j + 1] < a[j]) {
++                    temp = a[j + 1];
++                    a[j + 1] = a[j];
++                    a[j] = temp;
++                }
++            }
++        }
++    }
++
++    /**
++     * 快速排序
++     *
++     * @param a
++     * @param low
++     * @param high
++     */
++
++    private static void quickSort(int[] a, int low, int high) {
++        int temp, t;
++        if (low > high) {
++            return;
++        }
++        int i = low;
++        int j = high;
++        temp = a[i];// 基准位
++
++        while (i < j) {
++            // 先看右边，依次往左递减
++            while (i < j && a[j] >= temp) {
++                j--;
++            }
++            // 再看左边，依次往右递增
++            while (i < j && a[i] <= temp) {
++                i++;
++            }
++            // 大于和小于基准数的两个数互换位置
++            if (i < j) {
++                t = a[j];
++                a[j] = a[i];
++                a[i] = t;
++            }
++        }
++        // 最后将基准为与i和j相等位置的数字交换
++        a[low] = a[i];
++        a[i] = temp;
++
++        quickSort(a, low, j - 1);
++        quickSort(a, j + 1, high);
++    }
++
++    /**
++     * 归并排序
++     *
++     * @param a
++     * @param left
++     * @param mid
++     * @param right
++     */
++    private static void merge(int[] a, int left, int mid, int right) {
++        int k = left;
++        int[] temp = new int[a.length];
++        int i = left, j = mid + 1;// 左右指针
++        while (i <= mid && j <= right) {
++            if (a[i] <= a[j]) {
++                temp[k++] = a[i++];
++                // i++; k++;
++            } else {
++                temp[k++] = a[j++];
++                // j++; k++;
++            }
++        }
++        while (i <= mid) {
++            temp[k++] = a[i++];
++            // k++; i++;
++        }
++        while (j <= right) {
++            temp[k++] = a[j++];
++            // k++; j++;
++        }
++        // 将排序好的数组复制回原数组
++//        for (int n = left; n <= right; n++) {
++//            a[n] = temp[n];
++//        }
++        System.arraycopy(temp, left, a, left, right - left);//数组复制，等同于上边
++
++    }
++
++    private static void mergeSort(int[] a, int start, int end) {
++        if (start < end) {
++            int mid = (start + end) / 2;
++            mergeSort(a, start, mid);// 左边递归排序
++            mergeSort(a, mid + 1, end);// 右边递归排序
++            merge(a, start, mid, end);// 左右两部分合并
++        }
++    }
++
++    /**
++     * 希尔排序
++     *
++     * @param a
++     */
++    private static void shellSort(int[] a) {
++        int temp, i, j;
++        for (int h = a.length / 2; h > 0; h = h / 2) {
++            for (i = h; i < a.length; i++) {
++                temp = a[i];// 步长位置
++                for (j = i - h; j >= 0; j = j - h) {// 上一个步长位置
++                    if (a[j] > temp) {// 步长位置数 > 上一个位置数
++                        a[j + h] = a[j];// 交换位置
++                    } else {
++                        break;
++                    }
++                }
++                a[j + h] = temp;
++            }
++        }
++
++    }
++
++    /**
++     * 堆排序
++     *
++     * @param a
++     */
++    private static void duiSort(int[] a) {
++        int start = (a.length - 1) / 2;// 开始调整的位置
++        for (int i = start; i >= 0; i--) {
++            toMaxHeap(a, a.length, i);
++        }
++        // 首位互换
++        for (int i = a.length - 1; i > 0; i--) {
++            int t = a[0];
++            a[0] = a[i];
++            a[i] = t;
++            // 把剩余元素调成大顶锥
++            toMaxHeap(a, i, 0);
++        }
++
++    }
++
++    // 变成大顶锥
++    private static void toMaxHeap(int[] a, int size, int index) {
++        // 左右子节点索引 大了不动
++        int leftChild = index * 2 + 1;
++        int rightChild = index * 2 + 2;
++        // 最大节点对应的索引
++        int maxIndex = index;
++        if (leftChild < size && a[leftChild] > a[maxIndex]) {
++            maxIndex = leftChild;
++        }
++        if (rightChild < size && a[rightChild] > a[maxIndex]) {
++            maxIndex = rightChild;
++        }
++        if (maxIndex != index) {// 交换位置，大数在顶
++            int t = a[maxIndex];
++            a[maxIndex] = a[index];
++            a[index] = t;
++            // 若交换后改变了下面的堆结构
++            toMaxHeap(a, size, maxIndex);
++        }
++    }
++
++    public static void main(String[] args) {
++        int a[] = {34, 5, 6, 8, 3, 1, 11, 3, 56, 7, 98};
++        int b[] = {34, 5, 6, 8, 3, 1, 11, 3, 56, 7, 98};
++        int c[] = {34, 5, 6, 8, 3, 1, 11, 3, 56, 7, 98};
++        int d[] = {34, 5, 6, 8, 3, 1, 11, 3, 56, 7, 98};
++        int e[] = {34, 5, 6, 8, 3, 1, 11, 3, 56, 7, 98};
++        int f[] = {34, 5, 6, 8, 3, 1, 11, 3, 56, 7, 98};
++        int g[] = {34, 5, 6, 8, 3, 1, 11, 3, 56, 7, 98};
++
++        selectSort(a);// 选择排序
++        System.out.println("选择排序:");
++        for (int i = 0; i < a.length; i++) {
++            if (i != a.length - 1) {
++                System.out.print(a[i] + ",");
++            } else {
++                System.out.print(a[i]);
++            }
++        }
++        System.out.println();
++
++        insertSort(b);// 插入排序
++        System.out.println("插入排序:");
++        for (int i = 0; i < b.length; i++) {
++            if (i != b.length - 1) {
++                System.out.print(b[i] + ",");
++            } else {
++                System.out.print(b[i]);
++            }
++        }
++        System.out.println();
++
++        bubbleSort(c);// 冒泡排序
++        System.out.println("冒泡排序:");
++        for (int i = 0; i < c.length; i++) {
++            if (i != c.length - 1) {
++                System.out.print(c[i] + ",");
++            } else {
++                System.out.print(c[i]);
++            }
++        }
++        System.out.println();
++
++        quickSort(d, 0, d.length - 1);// 快速排序
++        System.out.println("快速排序:");
++        for (int i = 0; i < d.length; i++) {
++            if (i != d.length - 1) {
++                System.out.print(d[i] + ",");
++            } else {
++                System.out.print(d[i]);
++            }
++        }
++        System.out.println();
++
++        mergeSort(e, 0, e.length - 1);// 归并排序
++        System.out.println("归并排序:");
++        for (int i = 0; i < e.length; i++) {
++            if (i != e.length - 1) {
++                System.out.print(e[i] + ",");
++            } else {
++                System.out.print(e[i]);
++            }
++        }
++        System.out.println();
++
++        shellSort(f);// 希尔排序
++        System.out.println("希尔排序:");
++        for (int i = 0; i < f.length; i++) {
++            if (i != f.length - 1) {
++                System.out.print(f[i] + ",");
++            } else {
++                System.out.print(f[i]);
++            }
++        }
++        System.out.println();
++
++        duiSort(g);// 堆排序
++        System.out.println("堆排序:");
++        for (int i = 0; i < g.length; i++) {
++            if (i != g.length - 1) {
++                System.out.print(g[i] + ",");
++            } else {
++                System.out.print(g[i]);
++            }
++        }
++        System.out.println();
++
++    }
++
++}
+Index: src/com/mahongchao/array/findMostInArray.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/mahongchao/array/findMostInArray.java	(date 1585045424537)
++++ src/com/mahongchao/array/findMostInArray.java	(date 1585045424537)
+@@ -0,0 +1,72 @@
++package com.mahongchao.array;
++
++import java.util.HashMap;
++import java.util.Iterator;
++import java.util.Map;
++
++/**
++ * 找出数组中出现次数最多的值
++ */
++public class findMostInArray {
++
++    /**
++     * map方法(推荐)
++     *
++     * @param a
++     * @return
++     */
++    private static int findMost1(int a[]) {
++        int x = 0, most = 0;//x:值,most:次数
++        Map<Integer, Integer> map = new HashMap<>();//键值对：a[i]~次数
++        for (int i = 0; i < a.length; i++) {
++            if (map.containsKey(a[i])) {
++                map.put(a[i], map.get(a[i]) + 1);
++            } else {
++                map.put(a[i], 1);
++            }
++        }
++        //获得map迭代器
++        Iterator iterator = map.entrySet().iterator();
++        while (iterator.hasNext()) {
++            Map.Entry next = (Map.Entry) iterator.next();
++            Integer key = (Integer) next.getKey();
++            Integer value = (Integer) next.getValue();
++            if (most < value) {
++                most = value;
++                x = key;
++            }
++        }
++
++        return x;
++    }
++
++    /**
++     * 空间换时间方法(消耗内存空间，不推荐)
++     *
++     * @param a
++     * @return
++     */
++    private static int findMost2(int a[]) {
++        int x = 0, most;
++        int count[] = new int[a.length];//存放次数
++        for (int i = 0; i < a.length; i++) {
++            count[a[i]]++;
++        }
++        for (int j = 1; j < count.length; j++) {
++            if (count[j] > count[j - 1]) {
++                most = count[j];//次数
++                x = j;//值
++            }
++        }
++        return x;
++    }
++
++    public static void main(String[] args) {
++        int a[] = {1, 2, 2, 3, 3, 3, 3};
++        int x = findMost1(a);
++        int y = findMost2(a);
++        System.out.println(x);
++        System.out.println(y);
++
++    }
++}
+Index: src/kuaishou/kusishou3.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/kuaishou/kusishou3.java	(date 1586946357798)
++++ src/kuaishou/kusishou3.java	(date 1586946357798)
+@@ -0,0 +1,12 @@
++package kuaishou;
++
++public class kusishou3 {
++    public int[] WaitInLine(int[] a, int[] b) {
++        int x[] = new int[a.length];
++        for (int i = 0; i < a.length; i++) {
++            x[i] = i + 1;
++        }
++        return null;
++    }
++
++}
+Index: src/kuaishou/kuaishou4.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/kuaishou/kuaishou4.java	(date 1586946357804)
++++ src/kuaishou/kuaishou4.java	(date 1586946357804)
+@@ -0,0 +1,29 @@
++package kuaishou;
++
++public class kuaishou4 {
++    public int GetMaxStaffs(char[][] pos) {
++        int row = pos.length;
++        int col = pos[0].length;
++        int count = 0;
++        if (pos[0][0] == '.') {
++            count++;
++        }
++        if (pos[0][col - 1] == '.') {
++            count++;
++        }
++        if (pos[row - 1][0] == '.') {
++            count++;
++        }
++        if (pos[row - 1][col - 1] == '.') {
++            count++;
++        }
++        for (int i = 1; i < row; i++) {
++            for (int j = 1; j < col; j++) {
++                if (pos[i][j] == '.' && pos[i - 1][j] != '.' && pos[i + 1][j] != '.' && pos[i][j - 1] != '.' && pos[i][j + 1] != '.') {
++                    count++;
++                }
++            }
++        }
++        return count;
++    }
++}
+Index: src/kuaishou/kuaishjou.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/kuaishou/kuaishjou.java	(date 1586946357818)
++++ src/kuaishou/kuaishjou.java	(date 1586946357818)
+@@ -0,0 +1,57 @@
++package kuaishou;
++
++import java.util.Scanner;
++
++public class kuaishjou {
++    public static void main(String[] args) {
++        Scanner scanner = new Scanner(System.in);
++        String s = scanner.nextLine();
++        test(s);
++    }
++
++    public static void test(String s) {
++        char[] c = s.toCharArray();
++        int shuzi = 0;
++        for (int p = 0; p < c.length; p++) {
++            if (c[p] == '(' || c[p] == ')') {
++                shuzi++;
++            }
++        }
++        char[] x = new char[shuzi];
++        int k = 0;
++        for (int i = 0; i < c.length; i++) {
++            if (c[i] == '(' || c[i] == ')') {
++                x[k++] = c[i];
++            }
++        }
++        int count = 0, leftCount = 0, rightCount = 0;
++        int j = 0;
++        while (j < x.length - 1) {
++            if (x[j] == '(' && x[j + 1] == ')') {
++                count++;
++                j += 2;
++            } else if (x[j] == '(' && x[j + 1] == '(') {
++                leftCount++;
++                j++;
++            } else if (x[j] == ')' && x[j + 1] == '(') {
++                rightCount++;
++                j++;
++            } else if (x[j] == ')' && x[j + 1] == ')') {
++                rightCount++;
++                j++;
++            } else {
++                j++;
++            }
++        }
++        if (x[x.length - 2] == '(' && x[x.length - 1] == '(') {
++            leftCount++;
++        }
++        if (x[x.length - 2] == ')' && x[x.length - 1] == '(') {
++            leftCount++;
++        }
++        if (x[x.length - 2] == ')' && x[x.length - 1] == ')') {
++            rightCount++;
++        }
++        System.out.println(count + " " + leftCount + " " + rightCount);
++    }
++}
+Index: src/kuaishou/kuaishou2.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/kuaishou/kuaishou2.java	(date 1586946357792)
++++ src/kuaishou/kuaishou2.java	(date 1586946357792)
+@@ -0,0 +1,43 @@
++package kuaishou;
++
++import java.util.Scanner;
++
++public class kuaishou2 {
++    public static void main(String[] args) {
++        Scanner scanner = new Scanner(System.in);
++        int R = scanner.nextInt();
++        int N = scanner.nextInt();
++        int[] test = test(R, N);
++
++    }
++
++    public static int[] test(int R, int N) {
++        int shiyan = R;
++        if (R == 1) {
++            return new int[1];
++        }
++        if ((R - 1) % N == 0) {
++            R = R - 1;
++        }
++        if (R % N != 0) {
++            return new int[1];
++        }
++        int count = 0;
++        while (R != 0) {
++            R = R / N - 1;
++            if (R % N != 0) {
++                return new int[1];
++            }
++            count++;
++        }
++        int res[] = new int[count];
++        for (int i = 0; i < count; i++) {
++            if ((shiyan - 1) % N == 0) {
++                res[0] = 0;
++                i++;
++            }
++            res[i] = i + 1;
++        }
++        return res;
++    }
++}
+\ No newline at end of file
+Index: src/Test/Kuaishou2020B24.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/Test/Kuaishou2020B24.java	(date 1586593041369)
++++ src/Test/Kuaishou2020B24.java	(date 1586593041369)
+@@ -0,0 +1,31 @@
++package Test;
++
++import java.util.Scanner;
++
++public class Kuaishou2020B24 {
++    public static void main(String[] args) {
++        Scanner scanner = new Scanner(System.in);
++        String s = scanner.nextLine();
++        System.out.println(test(s));
++    }
++
++    public static String test(String s) {
++        s = s.replace('.', ' ');
++        String[] a = s.split(" ");
++        int i = 0, j = a.length - 1;
++        while (i < j) {
++            String t = a[i];
++            a[i] = a[j];
++            a[j] = t;
++            i++;
++            j--;
++        }
++        String res = "";
++        for (int k = 0; k < a.length; k++) {
++            if (!"".equals(a[k]) && !".".equals(a[k])) {
++                res += a[k] + " ";
++            }
++        }
++        return res.trim() + ".";
++    }
++}
+Index: src/Test/Kuaishou2020B23.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/Test/Kuaishou2020B23.java	(date 1586679850977)
++++ src/Test/Kuaishou2020B23.java	(date 1586679850977)
+@@ -0,0 +1,0 @@
+Index: src/Test/Kuaishou2020B21.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/Test/Kuaishou2020B21.java	(date 1586573300320)
++++ src/Test/Kuaishou2020B21.java	(date 1586573300320)
+@@ -0,0 +1,102 @@
++package Test;
++
++import java.util.HashMap;
++import java.util.Scanner;
++
++public class Kuaishou2020B21 {
++    public static void main(String[] args) {
++        Scanner scanner = new Scanner(System.in);
++        char a[][] = new char[9][9];
++        for (int i = 0; i < 9; i++) {
++            a[i] = scanner.nextLine().toCharArray();
++        }
++        boolean flag = test(a);
++        if (flag) {
++            System.out.println("合法在输出字符串，" + flag);
++        } else {
++            System.out.println("非法则输出字符串，" + flag);
++        }
++    }
++
++    public static boolean test(char a[][]) {
++        boolean f1 = rowComper(a, 0, a.length - 1);
++        boolean f2 = colComper(a, 0, a[0].length - 1);
++
++        boolean f3 = juxingComper(a, 0, 2, 0, 2);
++        boolean f4 = juxingComper(a, 3, 5, 0, 2);
++        boolean f5 = juxingComper(a, 6, 8, 0, 2);
++        boolean f6 = juxingComper(a, 0, 2, 3, 5);
++        boolean f7 = juxingComper(a, 3, 5, 3, 5);
++        boolean f8 = juxingComper(a, 6, 8, 3, 5);
++        boolean f9 = juxingComper(a, 0, 2, 6, 8);
++        boolean f10 = juxingComper(a, 3, 5, 6, 8);
++        boolean f11 = juxingComper(a, 6, 8, 6, 8);
++        return f1 && f2 && f3 && f4 && f5 && f6 && f7 && f8 && f9 && f10 && f11;
++
++    }
++
++    public static boolean rowComper(char a[][], int start, int end) {
++        HashMap<Character, Integer> map = null;
++        for (int i = start; i <= end; i++) {//行
++            map.clear();
++            for (int j = start; j <= end; j++) {//列
++                if (a[i][j] != 'X') {
++                    if (map.containsKey(a[i][j])) {
++                        map.put(a[i][j], map.get(a[i][j]) + 1);
++                    } else {
++                        map.put(a[i][j], 1);
++                    }
++                }
++            }
++            for (Character key : map.keySet()) {
++                if (map.get(key) > 1 || key < '0' || key > '9' || key == ' ') {
++                    return false;
++                }
++            }
++        }
++        return true;
++    }
++
++    public static boolean colComper(char a[][], int start, int end) {
++        HashMap<Character, Integer> map = null;
++        for (int i = start; i <= end; i++) {//列
++            map.clear();
++            for (int j = start; j <= end; j++) {//行
++                if (a[j][i] != 'X') {
++                    if (map.containsKey(a[j][i])) {
++                        map.put(a[j][i], map.get(a[j][i]) + 1);
++                    } else {
++                        map.put(a[j][i], 1);
++                    }
++                }
++            }
++            for (Character key : map.keySet()) {
++                if (map.get(key) > 1 || key < '0' || key > '9' || key == ' ') {
++                    return false;
++                }
++            }
++        }
++        return true;
++    }
++
++    public static boolean juxingComper(char a[][], int rowStart, int rowEnd, int colStart, int colEnd) {
++        HashMap<Character, Integer> map = null;
++        for (int i = rowStart; i <= rowEnd; i++) {
++            for (int j = colStart; j <= colEnd; j++) {
++                if (a[i][j] != 'X') {
++                    if (map.containsKey(a[i][j])) {
++                        map.put(a[i][j], map.get(a[i][j]) + 1);
++                    } else {
++                        map.put(a[i][j], 1);
++                    }
++                }
++            }
++        }
++        for (Character key : map.keySet()) {
++            if (map.get(key) > 1 || key < '0' || key > '9' || key == ' ') {
++                return false;
++            }
++        }
++        return true;
++    }
++}
+Index: src/com/mahongchao/jianzhiOffer/Main.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/mahongchao/jianzhiOffer/Main.java	(date 1586481581539)
++++ src/com/mahongchao/jianzhiOffer/Main.java	(date 1586481581539)
+@@ -0,0 +1,34 @@
++package com.mahongchao.jianzhiOffer;
++
++import java.util.Arrays;
++import java.util.Scanner;
++
++public class Main {
++    public static int test(int hNum, int x[], int y[]) {
++        if (hNum < 1 || hNum > 100000) {
++            return -1;
++        }
++        Arrays.sort(x);
++        int xPingjun = (x[0] + x[x.length - 1]) / 2;
++        int sum = 0;
++        for (int i = 0; i < x.length; i++) {
++            if (x[i] < 1 || x[i] > 100000) {
++                return -1;
++            }
++            sum += (Math.abs(x[i] - xPingjun));
++        }
++        return sum;
++    }
++
++    public static void main(String[] args) {
++        Scanner scanner = new Scanner(System.in);
++        int hNum = scanner.nextInt();
++        int x[] = new int[hNum];
++        int y[] = new int[hNum];
++        for (int i = 0; i < x.length; i++) {
++            x[i] = scanner.nextInt();
++            y[i] = scanner.nextInt();
++        }
++        System.out.println(test(hNum, x, y));
++    }
++}
+Index: src/Test/Main001.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/Test/Main001.java	(date 1586570603110)
++++ src/Test/Main001.java	(date 1586570603110)
+@@ -0,0 +1,37 @@
++package Test;
++
++import java.util.Scanner;
++
++public class Main001 {
++    public static int test(int hNum, int x[]) {
++        if (hNum < 1 || hNum > 100000) {
++            return -1;
++        }
++        int sum = Integer.MAX_VALUE;
++        for (int i = x[0]; i <= x[x.length - 1]; i++) {
++            int curSum = 0;
++            for (int j = 0; j < x.length; j++) {
++                if (x[j] < 1 || x[j] > 100000) {
++                    return -1;
++                }
++                curSum += Math.abs(x[j] - i);
++            }
++            if (curSum < sum) {
++                sum = curSum;
++            }
++        }
++        return sum;
++    }
++
++    public static void main(String[] args) {
++        Scanner scanner = new Scanner(System.in);
++        int hNum = scanner.nextInt();
++        int x[] = new int[hNum];
++        int y[] = new int[hNum];
++        for (int i = 0; i < x.length; i++) {
++            x[i] = scanner.nextInt();
++            y[i] = scanner.nextInt();
++        }
++        System.out.println(test(hNum, x));
++    }
++}
+Index: src/com/mahongchao/jianzhiOffer/Main64.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/mahongchao/jianzhiOffer/Main64.java	(date 1586442640115)
++++ src/com/mahongchao/jianzhiOffer/Main64.java	(date 1586442640115)
+@@ -0,0 +1,43 @@
++package com.mahongchao.jianzhiOffer;
++
++import java.io.BufferedReader;
++import java.io.IOException;
++import java.io.InputStreamReader;
++
++public class Main64 {
++    public static void main(String[] args) throws IOException {
++        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
++        int n = Integer.parseInt(br.readLine());
++        System.out.println(cutRope(n));
++    }
++
++    private static int cutRope(int target) {
++        int a = 0;
++        int c = 0;
++        int maxValue = 2;
++
++        //输入参数范围验证
++        //if (2 > target || 60 < target) {
++        //  return -1;
++        //}
++        if (target == 2) {
++            return 1;
++        }
++        if (target == 3) {
++            return 2;
++        }
++        if (target % 3 == 0) {
++            maxValue = (int) Math.pow(3, target / 3);
++        } else {
++            a = target - 2;
++            c = a % 3;
++
++            maxValue = maxValue * (int) Math.pow(3, a / 3);
++            if (0 != c) {
++                maxValue = maxValue * c;
++            }
++        }
++
++        return maxValue;
++    }
++}
+Index: src/com/mahongchao/jianzhiOffer/Main4.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/mahongchao/jianzhiOffer/Main4.java	(date 1586442923896)
++++ src/com/mahongchao/jianzhiOffer/Main4.java	(date 1586442923896)
+@@ -0,0 +1,27 @@
++package com.mahongchao.jianzhiOffer;
++
++public class Main4 {
++    public TreeNode reConstructBinaryTree(int[] pre, int[] in) {
++        if (pre == null || in == null) {
++            return null;
++        }
++
++        java.util.HashMap<Integer, Integer> map = new java.util.HashMap<Integer, Integer>();
++        for (int i = 0; i < in.length; i++) {
++            map.put(in[i], i);
++        }
++        return preIn(pre, 0, pre.length - 1, in, 0, in.length - 1, map);
++    }
++
++    public TreeNode preIn(int[] p, int pi, int pj, int[] n, int ni, int nj, java.util.HashMap<Integer, Integer> map) {
++
++        if (pi > pj) {
++            return null;
++        }
++        TreeNode head = new TreeNode(p[pi]);
++        int index = map.get(p[pi]);
++        head.left = preIn(p, pi + 1, pi + index - ni, n, ni, index - 1, map);
++        head.right = preIn(p, pi + index - ni + 1, pj, n, index + 1, nj, map);
++        return head;
++    }
++}
+Index: src/com/mahongchao/jianzhiOffer/Main61.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/mahongchao/jianzhiOffer/Main61.java	(date 1586442023368)
++++ src/com/mahongchao/jianzhiOffer/Main61.java	(date 1586442023368)
+@@ -0,0 +1,31 @@
++package com.mahongchao.jianzhiOffer;
++
++import java.util.ArrayList;
++import java.util.Collections;
++
++public class Main61 {
++    public ArrayList<Integer> maxInWindows(int[] num, int size) {
++        if (num == null || size < 0) {
++            return null;
++        }
++        ArrayList<Integer> list = new ArrayList<Integer>();
++        if (size == 0) {
++            return list;
++        }
++
++        int length = num.length;
++        if (length < size) {
++            return list;
++        } else {
++            for (int i = 0; i < length - size + 1; i++) {
++                ArrayList<Integer> temp = new ArrayList<Integer>();
++                for (int j = i; j < size + i; j++) {
++                    temp.add(num[j]);
++                }
++                Collections.sort(temp);//list排序
++                list.add(temp.get(temp.size() - 1));
++            }
++        }
++        return list;
++    }
++}
+Index: src/com/mahongchao/jianzhiOffer/Main63.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/mahongchao/jianzhiOffer/Main63.java	(date 1586442329141)
++++ src/com/mahongchao/jianzhiOffer/Main63.java	(date 1586442329141)
+@@ -0,0 +1,26 @@
++package com.mahongchao.jianzhiOffer;
++
++public class Main63 {
++    public int movingCount(int threshold, int rows, int cols) {
++        int flag[][] = new int[rows][cols];
++        return process(0, 0, rows, cols, flag, threshold);
++    }
++
++    private int process(int i, int j, int rows, int cols, int[][] flag, int threshold) {
++        if (i < 0 || i >= rows || j < 0 || j >= cols || numSum(i) + numSum(j) > threshold || flag[i][j] == 1) return 0;
++        flag[i][j] = 1;
++        return process(i - 1, j, rows, cols, flag, threshold)
++                + process(i + 1, j, rows, cols, flag, threshold)
++                + process(i, j - 1, rows, cols, flag, threshold)
++                + process(i, j + 1, rows, cols, flag, threshold)
++                + 1;
++    }
++
++    private int numSum(int i) {
++        int a = 0;
++        do {
++            a += i % 10;
++        } while ((i = i / 10) > 0);
++        return a;
++    }
++}
+Index: src/com/mahongchao/jianzhiOffer/Main59.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/mahongchao/jianzhiOffer/Main59.java	(date 1586441383959)
++++ src/com/mahongchao/jianzhiOffer/Main59.java	(date 1586441383959)
+@@ -0,0 +1,25 @@
++package com.mahongchao.jianzhiOffer;
++
++public class Main59 {
++    int num = 0;
++
++    TreeNode KthNode(TreeNode pRoot, int k) {
++        if (pRoot == null || k == 0)
++            return null;
++        num = k;
++        return KthNode2(pRoot);
++    }
++
++    TreeNode KthNode2(TreeNode root) {
++        TreeNode t = null;
++        if (t == null && root.left != null)
++            t = KthNode2(root.left);
++        if (t == null && num == 1)
++            t = root;
++        else
++            num--;
++        if (t == null && root.right != null)
++            t = KthNode2(root.right);
++        return t;
++    }
++}
+Index: src/com/mahongchao/jianzhiOffer/Main60.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/mahongchao/jianzhiOffer/Main60.java	(date 1586441660105)
++++ src/com/mahongchao/jianzhiOffer/Main60.java	(date 1586441660105)
+@@ -0,0 +1,25 @@
++package com.mahongchao.jianzhiOffer;
++
++import java.util.ArrayList;
++import java.util.Collections;
++
++public class Main60 {
++    public ArrayList<Integer> arrayList = new ArrayList<>();
++
++    public void Insert(Integer num) {
++        arrayList.add(num);
++    }
++
++    public Double GetMedian() {
++        if (arrayList.size() < 1)
++            return 0.0;
++        Collections.sort(arrayList);//排序
++        if (arrayList.size() % 2 == 1) {
++            return Double.valueOf(arrayList.get(arrayList.size() / 2));
++        } else {
++            Double num1 = Double.valueOf(arrayList.get(arrayList.size() / 2));
++            Double num2 = Double.valueOf(arrayList.get(arrayList.size() / 2 - 1));
++            return (num1 + num2) / 2;
++        }
++    }
++}
+Index: src/com/mahongchao/jianzhiOffer/Main57.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/mahongchao/jianzhiOffer/Main57.java	(date 1586440885138)
++++ src/com/mahongchao/jianzhiOffer/Main57.java	(date 1586440885138)
+@@ -0,0 +1,36 @@
++package com.mahongchao.jianzhiOffer;
++
++import java.util.ArrayList;
++import java.util.LinkedList;
++
++public class Main57 {
++    ArrayList<ArrayList<Integer>> Print(TreeNode pRoot) {
++        ArrayList<ArrayList<Integer>> ret = new ArrayList<ArrayList<Integer>>();
++        ArrayList<Integer> tmp = new ArrayList<Integer>();
++        LinkedList<TreeNode> q = new LinkedList<TreeNode>();
++        if (pRoot == null)
++            return ret;
++        q.add(pRoot);
++        int now = 1, next = 0;
++        while (!q.isEmpty()) {
++            TreeNode t = q.remove();
++            now--;
++            tmp.add(t.val);
++            if (t.left != null) {
++                q.add(t.left);
++                next++;
++            }
++            if (t.right != null) {
++                q.add(t.right);
++                next++;
++            }
++            if (now == 0) {
++                ret.add(new ArrayList<Integer>(tmp));
++                tmp.clear();
++                now = next;
++                next = 0;
++            }
++        }
++        return ret;
++    }
++}
+Index: src/com/mahongchao/jianzhiOffer/Main58.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/mahongchao/jianzhiOffer/Main58.java	(date 1586441151861)
++++ src/com/mahongchao/jianzhiOffer/Main58.java	(date 1586441151861)
+@@ -0,0 +1,45 @@
++package com.mahongchao.jianzhiOffer;
++
++public class Main58 {
++    String Serialize(TreeNode root) {
++        if (root == null) {
++            return "";
++        }
++        StringBuilder sb = new StringBuilder();
++        Serialize2(root, sb);
++        return sb.toString();
++    }
++
++    void Serialize2(TreeNode root, StringBuilder sb) {
++        if (root == null) {
++            sb.append("#,");
++            return;
++        }
++        sb.append(root.val);
++        sb.append(',');
++        Serialize2(root.left, sb);
++        Serialize2(root.right, sb);
++    }
++
++    int index = -1;
++
++    TreeNode Deserialize(String str) {
++        if (str.length() == 0) {
++            return null;
++        }
++        String[] strs = str.split(",");
++        return Deserialize2(strs);
++    }
++
++    TreeNode Deserialize2(String[] strs) {
++        index++;
++        if (!strs[index].equals("#")) {
++            TreeNode root = new TreeNode(0);
++            root.val = Integer.parseInt(strs[index]);
++            root.left = Deserialize2(strs);
++            root.right = Deserialize2(strs);
++            return root;
++        }
++        return null;
++    }
++}
+Index: src/com/mahongchao/jianzhiOffer/Main55.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/mahongchao/jianzhiOffer/Main55.java	(date 1586439748130)
++++ src/com/mahongchao/jianzhiOffer/Main55.java	(date 1586439748130)
+@@ -0,0 +1,23 @@
++package com.mahongchao.jianzhiOffer;
++
++public class Main55 {
++    boolean isSymmetrical(TreeNode pRoot) {
++        if (pRoot == null) {
++            return true;
++        }
++        return isSymmetrical(pRoot.left, pRoot.right);
++    }
++
++    private boolean isSymmetrical(TreeNode left, TreeNode right) {
++        if (left == null && right == null) {
++            return true;
++        }
++        if (left == null || right == null) {
++            return false;
++        }
++        if (left.val == right.val) {
++            return isSymmetrical(left.left, right.right) && isSymmetrical(left.right, right.left);
++        }
++        return false;
++    }
++}
+Index: src/com/mahongchao/jianzhiOffer/Main56.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/mahongchao/jianzhiOffer/Main56.java	(date 1586440183684)
++++ src/com/mahongchao/jianzhiOffer/Main56.java	(date 1586440183684)
+@@ -0,0 +1,40 @@
++package com.mahongchao.jianzhiOffer;
++
++import java.util.ArrayList;
++import java.util.LinkedList;
++import java.util.Queue;
++
++public class Main56 {
++    public ArrayList<ArrayList<Integer>> Print(TreeNode pRoot) {
++        ArrayList<ArrayList<Integer>> res = new ArrayList<ArrayList<Integer>>();
++        if (pRoot == null) {
++            return res;
++        }
++
++        Queue<TreeNode> queue = new LinkedList<TreeNode>();
++        int rows = 1;
++        queue.add(pRoot);
++        while (!queue.isEmpty()) {
++            ArrayList<Integer> list = new ArrayList();
++            int size = queue.size();
++            for (int i = 0; i < size; i++) {
++                TreeNode t = queue.poll();
++                if (rows % 2 == 0) {
++                    list.add(0, t.val);
++                } else {
++                    list.add(t.val);
++                }
++                if (t.left != null) {
++                    queue.offer(t.left);
++                }
++                if (t.right != null) {
++                    queue.offer(t.right);
++                }
++            }
++            res.add(list);
++            rows++;
++        }
++        return res;
++
++    }
++}
+Index: src/com/mahongchao/jianzhiOffer/Main54.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/mahongchao/jianzhiOffer/Main54.java	(date 1586439388083)
++++ src/com/mahongchao/jianzhiOffer/Main54.java	(date 1586439388083)
+@@ -0,0 +1,24 @@
++package com.mahongchao.jianzhiOffer;
++
++public class Main54 {
++    public TreeLinkNode GetNext(TreeLinkNode pNode) {
++        if (pNode == null) {
++            return null;
++        }
++        if (pNode.right != null) {
++            pNode = pNode.right;
++            while (pNode.left != null) {
++                pNode = pNode.left;
++            }
++            return pNode;
++        }
++        while (pNode.next != null) {
++            if (pNode.next.left == pNode) {
++                return pNode.next;
++            }
++            pNode = pNode.next;
++        }
++        return null;
++    }
++
++}
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/misc.xml	(date 1583462027129)
++++ .idea/misc.xml	(date 1583462027129)
+@@ -0,0 +1,6 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
++    <output url="file://$PROJECT_DIR$/out" />
++  </component>
++</project>
+\ No newline at end of file
+Index: src/com/mahongchao/jianzhiOffer/TreeLinkNode.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/mahongchao/jianzhiOffer/TreeLinkNode.java	(date 1586438795549)
++++ src/com/mahongchao/jianzhiOffer/TreeLinkNode.java	(date 1586438795549)
+@@ -0,0 +1,13 @@
++package com.mahongchao.jianzhiOffer;
++
++
++public class TreeLinkNode {
++    int val;
++    TreeLinkNode left = null;
++    TreeLinkNode right = null;
++    TreeLinkNode next = null;
++
++    TreeLinkNode(int val) {
++        this.val = val;
++    }
++}
+Index: .idea/modules.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/modules.xml	(date 1583462027141)
++++ .idea/modules.xml	(date 1583462027141)
+@@ -0,0 +1,8 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="ProjectModuleManager">
++    <modules>
++      <module fileurl="file://$PROJECT_DIR$/JavaTest.iml" filepath="$PROJECT_DIR$/JavaTest.iml" />
++    </modules>
++  </component>
++</project>
+\ No newline at end of file
+Index: src/com/mahongchao/jianzhiOffer/Main52.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/mahongchao/jianzhiOffer/Main52.java	(date 1586435807662)
++++ src/com/mahongchao/jianzhiOffer/Main52.java	(date 1586435807662)
+@@ -0,0 +1,27 @@
++package com.mahongchao.jianzhiOffer;
++
++public class Main52 {
++    public ListNode EntryNodeOfLoop(ListNode pHead) {
++        if (pHead == null || pHead.next == null) {
++            return null;
++        }
++        ListNode p1 = pHead;//慢
++        ListNode p2 = pHead;//快
++        while (p2 != null && p2.next != null) {
++            p1 = p1.next;
++            p2 = p2.next.next;
++            if (p1 == p2) {
++                p1 = pHead;
++                while (p1 != p2) {
++                    p1 = p1.next;
++                    p2 = p2.next;
++                }
++                if (p1 == p2) {
++                    return p1;//两节点在入口点相遇
++                }
++            }
++        }
++        return null;
++    }
++
++}
+Index: src/com/mahongchao/jianzhiOffer/Main53.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/mahongchao/jianzhiOffer/Main53.java	(date 1586438386928)
++++ src/com/mahongchao/jianzhiOffer/Main53.java	(date 1586438386928)
+@@ -0,0 +1,32 @@
++package com.mahongchao.jianzhiOffer;
++
++public class Main53 {
++    public ListNode deleteDuplication(ListNode pHead) {
++        ListNode first = new ListNode(-1);
++        //这个头结点的下一个结点为pHead
++        first.next = pHead;
++
++        //p结点为pHead
++        ListNode p = pHead;
++        //last结点为新建的头结点
++        ListNode last = first;
++        //循环链表
++        while (p != null && p.next != null) {
++            //当这个值和下一个值想同时候，说明这两个值都是要删除。
++            if (p.val == p.next.val) {
++                //保存第一个值
++                int val = p.val;
++                //循环删除。当前值等于重复值的话，就加入删除范围。
++                while (p != null && p.val == val)
++                    p = p.next;
++                //让last指向p，完成对删除范围的删除
++                last.next = p;
++            } else {
++                //当不想等时候就移动两个指针，并且移动指针。
++                last = p;
++                p = p.next;
++            }
++        }
++        return first.next;
++    }
++}
+Index: JavaTest.iml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- JavaTest.iml	(date 1583462027125)
++++ JavaTest.iml	(date 1583462027125)
+@@ -0,0 +1,11 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<module type="JAVA_MODULE" version="4">
++  <component name="NewModuleRootManager" inherit-compiler-output="true">
++    <exclude-output />
++    <content url="file://$MODULE_DIR$">
++      <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
++    </content>
++    <orderEntry type="inheritedJdk" />
++    <orderEntry type="sourceFolder" forTests="false" />
++  </component>
++</module>
+\ No newline at end of file
+Index: src/com/mahongchao/jianzhiOffer/Main50.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/mahongchao/jianzhiOffer/Main50.java	(date 1586430419200)
++++ src/com/mahongchao/jianzhiOffer/Main50.java	(date 1586430419200)
+@@ -0,0 +1,22 @@
++package com.mahongchao.jianzhiOffer;
++
++public class Main50 {
++    public int[] multiply(int[] A) {
++
++        if (A == null && A.length == 0) {
++            return A;
++        }
++        int[] B = new int[A.length];
++        for (int i = 0; i < A.length; i++) {
++            int sum = 1;
++            for (int j = 0; j < A.length; j++) {
++                if (i != j) {
++                    sum *= A[j];
++                }
++            }
++            B[i] = sum;
++        }
++        return B;
++
++    }
++}
+Index: src/com/mahongchao/jianzhiOffer/Main51.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/mahongchao/jianzhiOffer/Main51.java	(date 1586433478728)
++++ src/com/mahongchao/jianzhiOffer/Main51.java	(date 1586433478728)
+@@ -0,0 +1,8 @@
++package com.mahongchao.jianzhiOffer;
++
++public class Main51 {
++    public boolean isNumeric(char[] str) {
++        String s = String.valueOf(str);
++        return s.matches("[+-]?[0-9]*(\\.[0-9]*)?([eE][+-]?[0-9]+)?");
++    }
++}
+Index: src/com/mahongchao/jianzhiOffer/Main47.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/mahongchao/jianzhiOffer/Main47.java	(date 1586428963980)
++++ src/com/mahongchao/jianzhiOffer/Main47.java	(date 1586428963980)
+@@ -0,0 +1,15 @@
++package com.mahongchao.jianzhiOffer;
++
++public class Main47 {
++    public int Add(int num1, int num2) {
++        /*BigInteger i = BigInteger.valueOf(num1);
++        BigInteger j = BigInteger.valueOf(num2);
++        return (i.add(j)).intValue();*/
++        while (num2 != 0) {
++            int temp = num1 ^ num2;  //不用进位的部分
++            num2 = (num1 & num2) << 1;  //进位的部分
++            num1 = temp;
++        }
++        return num1;
++    }
++}
+Index: src/com/mahongchao/jianzhiOffer/Main48.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/mahongchao/jianzhiOffer/Main48.java	(date 1586427330150)
++++ src/com/mahongchao/jianzhiOffer/Main48.java	(date 1586427330150)
+@@ -0,0 +1,39 @@
++package com.mahongchao.jianzhiOffer;
++
++public class Main48 {
++    public int StrToInt(String str) {
++        if (str.length() <= 0 || "".equals(str)) {
++            return 0;
++        }
++        char[] c = str.trim().toCharArray();
++        boolean fuhao = true;
++        int start = 0;
++        if (c[0] == '-' || c[0] == '+') {//判断符号位，确定数字起始位
++            start = 1;
++            if (c[0] == '-') {
++                fuhao = false;
++            }
++        }
++        long sum = 0;
++        for (int i = start; i < c.length; i++) {
++            if (c[i] > '9' || c[i] < '0') {//字符'0'对应的ASCII码值是48（转化为int类型），而字符'9'对应的ASCII码值是57
++                return 0;
++            }
++            sum = sum * 10 + (c[i] - '0');//转化为int
++            if (sum > Integer.MAX_VALUE || (sum * -1) < Integer.MIN_VALUE) {
++                return 0;
++            }
++        }
++
++        int result = (int) sum;
++        return fuhao ? result : result * -1;
++
++    }
++
++    public static void main(String[] args) {
++        Main48 test = new Main48();
++        String s = "-2147483648";
++        int i = test.StrToInt(s);
++        System.out.println(i);
++    }
++}
+Index: .idea/uiDesigner.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/uiDesigner.xml	(date 1583462297034)
++++ .idea/uiDesigner.xml	(date 1583462297034)
+@@ -0,0 +1,124 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="Palette2">
++    <group name="Swing">
++      <item class="com.intellij.uiDesigner.HSpacer" tooltip-text="Horizontal Spacer" icon="/com/intellij/uiDesigner/icons/hspacer.png" removable="false" auto-create-binding="false" can-attach-label="false">
++        <default-constraints vsize-policy="1" hsize-policy="6" anchor="0" fill="1" />
++      </item>
++      <item class="com.intellij.uiDesigner.VSpacer" tooltip-text="Vertical Spacer" icon="/com/intellij/uiDesigner/icons/vspacer.png" removable="false" auto-create-binding="false" can-attach-label="false">
++        <default-constraints vsize-policy="6" hsize-policy="1" anchor="0" fill="2" />
++      </item>
++      <item class="javax.swing.JPanel" icon="/com/intellij/uiDesigner/icons/panel.png" removable="false" auto-create-binding="false" can-attach-label="false">
++        <default-constraints vsize-policy="3" hsize-policy="3" anchor="0" fill="3" />
++      </item>
++      <item class="javax.swing.JScrollPane" icon="/com/intellij/uiDesigner/icons/scrollPane.png" removable="false" auto-create-binding="false" can-attach-label="true">
++        <default-constraints vsize-policy="7" hsize-policy="7" anchor="0" fill="3" />
++      </item>
++      <item class="javax.swing.JButton" icon="/com/intellij/uiDesigner/icons/button.png" removable="false" auto-create-binding="true" can-attach-label="false">
++        <default-constraints vsize-policy="0" hsize-policy="3" anchor="0" fill="1" />
++        <initial-values>
++          <property name="text" value="Button" />
++        </initial-values>
++      </item>
++      <item class="javax.swing.JRadioButton" icon="/com/intellij/uiDesigner/icons/radioButton.png" removable="false" auto-create-binding="true" can-attach-label="false">
++        <default-constraints vsize-policy="0" hsize-policy="3" anchor="8" fill="0" />
++        <initial-values>
++          <property name="text" value="RadioButton" />
++        </initial-values>
++      </item>
++      <item class="javax.swing.JCheckBox" icon="/com/intellij/uiDesigner/icons/checkBox.png" removable="false" auto-create-binding="true" can-attach-label="false">
++        <default-constraints vsize-policy="0" hsize-policy="3" anchor="8" fill="0" />
++        <initial-values>
++          <property name="text" value="CheckBox" />
++        </initial-values>
++      </item>
++      <item class="javax.swing.JLabel" icon="/com/intellij/uiDesigner/icons/label.png" removable="false" auto-create-binding="false" can-attach-label="false">
++        <default-constraints vsize-policy="0" hsize-policy="0" anchor="8" fill="0" />
++        <initial-values>
++          <property name="text" value="Label" />
++        </initial-values>
++      </item>
++      <item class="javax.swing.JTextField" icon="/com/intellij/uiDesigner/icons/textField.png" removable="false" auto-create-binding="true" can-attach-label="true">
++        <default-constraints vsize-policy="0" hsize-policy="6" anchor="8" fill="1">
++          <preferred-size width="150" height="-1" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JPasswordField" icon="/com/intellij/uiDesigner/icons/passwordField.png" removable="false" auto-create-binding="true" can-attach-label="true">
++        <default-constraints vsize-policy="0" hsize-policy="6" anchor="8" fill="1">
++          <preferred-size width="150" height="-1" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JFormattedTextField" icon="/com/intellij/uiDesigner/icons/formattedTextField.png" removable="false" auto-create-binding="true" can-attach-label="true">
++        <default-constraints vsize-policy="0" hsize-policy="6" anchor="8" fill="1">
++          <preferred-size width="150" height="-1" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JTextArea" icon="/com/intellij/uiDesigner/icons/textArea.png" removable="false" auto-create-binding="true" can-attach-label="true">
++        <default-constraints vsize-policy="6" hsize-policy="6" anchor="0" fill="3">
++          <preferred-size width="150" height="50" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JTextPane" icon="/com/intellij/uiDesigner/icons/textPane.png" removable="false" auto-create-binding="true" can-attach-label="true">
++        <default-constraints vsize-policy="6" hsize-policy="6" anchor="0" fill="3">
++          <preferred-size width="150" height="50" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JEditorPane" icon="/com/intellij/uiDesigner/icons/editorPane.png" removable="false" auto-create-binding="true" can-attach-label="true">
++        <default-constraints vsize-policy="6" hsize-policy="6" anchor="0" fill="3">
++          <preferred-size width="150" height="50" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JComboBox" icon="/com/intellij/uiDesigner/icons/comboBox.png" removable="false" auto-create-binding="true" can-attach-label="true">
++        <default-constraints vsize-policy="0" hsize-policy="2" anchor="8" fill="1" />
++      </item>
++      <item class="javax.swing.JTable" icon="/com/intellij/uiDesigner/icons/table.png" removable="false" auto-create-binding="true" can-attach-label="false">
++        <default-constraints vsize-policy="6" hsize-policy="6" anchor="0" fill="3">
++          <preferred-size width="150" height="50" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JList" icon="/com/intellij/uiDesigner/icons/list.png" removable="false" auto-create-binding="true" can-attach-label="false">
++        <default-constraints vsize-policy="6" hsize-policy="2" anchor="0" fill="3">
++          <preferred-size width="150" height="50" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JTree" icon="/com/intellij/uiDesigner/icons/tree.png" removable="false" auto-create-binding="true" can-attach-label="false">
++        <default-constraints vsize-policy="6" hsize-policy="6" anchor="0" fill="3">
++          <preferred-size width="150" height="50" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JTabbedPane" icon="/com/intellij/uiDesigner/icons/tabbedPane.png" removable="false" auto-create-binding="true" can-attach-label="false">
++        <default-constraints vsize-policy="3" hsize-policy="3" anchor="0" fill="3">
++          <preferred-size width="200" height="200" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JSplitPane" icon="/com/intellij/uiDesigner/icons/splitPane.png" removable="false" auto-create-binding="false" can-attach-label="false">
++        <default-constraints vsize-policy="3" hsize-policy="3" anchor="0" fill="3">
++          <preferred-size width="200" height="200" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JSpinner" icon="/com/intellij/uiDesigner/icons/spinner.png" removable="false" auto-create-binding="true" can-attach-label="true">
++        <default-constraints vsize-policy="0" hsize-policy="6" anchor="8" fill="1" />
++      </item>
++      <item class="javax.swing.JSlider" icon="/com/intellij/uiDesigner/icons/slider.png" removable="false" auto-create-binding="true" can-attach-label="false">
++        <default-constraints vsize-policy="0" hsize-policy="6" anchor="8" fill="1" />
++      </item>
++      <item class="javax.swing.JSeparator" icon="/com/intellij/uiDesigner/icons/separator.png" removable="false" auto-create-binding="false" can-attach-label="false">
++        <default-constraints vsize-policy="6" hsize-policy="6" anchor="0" fill="3" />
++      </item>
++      <item class="javax.swing.JProgressBar" icon="/com/intellij/uiDesigner/icons/progressbar.png" removable="false" auto-create-binding="true" can-attach-label="false">
++        <default-constraints vsize-policy="0" hsize-policy="6" anchor="0" fill="1" />
++      </item>
++      <item class="javax.swing.JToolBar" icon="/com/intellij/uiDesigner/icons/toolbar.png" removable="false" auto-create-binding="false" can-attach-label="false">
++        <default-constraints vsize-policy="0" hsize-policy="6" anchor="0" fill="1">
++          <preferred-size width="-1" height="20" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JToolBar$Separator" icon="/com/intellij/uiDesigner/icons/toolbarSeparator.png" removable="false" auto-create-binding="false" can-attach-label="false">
++        <default-constraints vsize-policy="0" hsize-policy="0" anchor="0" fill="1" />
++      </item>
++      <item class="javax.swing.JScrollBar" icon="/com/intellij/uiDesigner/icons/scrollbar.png" removable="false" auto-create-binding="true" can-attach-label="false">
++        <default-constraints vsize-policy="6" hsize-policy="0" anchor="0" fill="2" />
++      </item>
++    </group>
++  </component>
++</project>
+\ No newline at end of file
+Index: src/com/mahongchao/jianzhiOffer/Main26.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/mahongchao/jianzhiOffer/Main26.java	(date 1586426552770)
++++ src/com/mahongchao/jianzhiOffer/Main26.java	(date 1586426552770)
+@@ -0,0 +1,7 @@
++package com.mahongchao.jianzhiOffer;
++
++public class Main26 {
++    public int LastRemaining_Solution(int n, int m) {
++        return 0;
++    }
++}
+Index: src/com/mahongchao/array/maxSubArray.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/mahongchao/array/maxSubArray.java	(date 1585041859107)
++++ src/com/mahongchao/array/maxSubArray.java	(date 1585041859107)
+@@ -0,0 +1,45 @@
++package com.mahongchao.array;
++
++public class maxSubArray {
++    private static int maxSubArray1(int a[]) {
++        int sum = 0;
++        int max = a[0];
++        for (int i = 0; i < a.length; i++) {
++            sum += a[i];
++            max = Math.max(max, sum);
++            if (sum < 0) {
++                sum = 0;
++            }
++        }
++        return max;
++    }
++
++    /**
++     * 暴力法
++     * @param a
++     * @return
++     */
++    private static int maxSubArray2(int a[]) { //暴力法
++        int sum, max = 0;
++        for (int i = 0; i < a.length; i++) {
++            sum = 0; // 每次和置零
++            for (int j = i; j < a.length; j++) {
++                sum += a[j];
++                if (sum > max) {
++                    max = sum;
++                }
++            }
++        }
++        return max;
++    }
++
++
++    public static void main(String[] args) {
++        int a[] = {3, -2, 1, -4, 3, 4, -2, 5, 1};
++        int max1 = maxSubArray1(a);
++        int max2 = maxSubArray2(a);
++        System.out.println(max1);
++        System.out.println(max2);
++    }
++
++}
+Index: src/com/mahongchao/jianzhiOffer/Main46.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/mahongchao/jianzhiOffer/Main46.java	(date 1586421174751)
++++ src/com/mahongchao/jianzhiOffer/Main46.java	(date 1586421174751)
+@@ -0,0 +1,15 @@
++package com.mahongchao.jianzhiOffer;
++
++/**
++ * 从m加到n(不能用乘除法、for、while、if、else、switch、case等关键字及条件判断语句（A?B:C）)
++ */
++public class Main46 {
++    public int Sum_Solution(int m, int n) {
++        if (m <= 0 || n <= 0) {
++            return -1;
++        }
++        int sm = (int) (Math.pow(m - 1, 2) + m - 1) >> 1;
++        int sn = (int) (Math.pow(n, 2) + n) >> 1;
++        return sn - sm;
++    }
++}
+Index: src/com/mahongchao/jianzhiOffer/Main44.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/mahongchao/jianzhiOffer/Main44.java	(date 1586413644096)
++++ src/com/mahongchao/jianzhiOffer/Main44.java	(date 1586413644096)
+@@ -0,0 +1,23 @@
++package com.mahongchao.jianzhiOffer;
++
++public class Main44 {
++    public String ReverseSentence(String str) {
++        String result = "";
++        if ("".equals(str.trim()) || str == null) {
++            return str;
++        }
++        String[] s = str.split(" ");
++
++        for (int i = s.length - 1; i >= 0; i--) {
++            result += s[i] + " ";
++        }
++        return result.trim();
++    }
++
++    public static void main(String[] args) {
++        Main44 test = new Main44();
++        //String s = test.ReverseSentence("student. a am I");
++        String s = test.ReverseSentence("a ");
++        System.out.println(s);
++    }
++}
+Index: src/com/mahongchao/jianzhiOffer/Main45.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/mahongchao/jianzhiOffer/Main45.java	(date 1586415313184)
++++ src/com/mahongchao/jianzhiOffer/Main45.java	(date 1586415313184)
+@@ -0,0 +1,30 @@
++package com.mahongchao.jianzhiOffer;
++
++import java.util.Arrays;
++
++public class Main45 {
++    public boolean isContinuous(int[] numbers) {
++        if (numbers.length <= 0) {
++            return false;
++        }
++        Arrays.sort(numbers);
++        for (int i = 0; i < numbers.length - 1; i++) {
++            if (numbers[i] != 0 && numbers[i + 1] != 0 && numbers[i] == numbers[i + 1]) {//有对子
++                return false;
++            }
++        }
++        int min = -1, max = numbers[numbers.length - 1];
++        int i = 0;
++        while (i < numbers.length) {
++            if (numbers[i] != 0) {
++                min = numbers[i];
++                break;
++            }
++            i++;
++        }
++        if (max - min > numbers.length - 1) {
++            return false;
++        }
++        return true;
++    }
++}
+Index: src/com/mahongchao/jianzhiOffer/Main42.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/mahongchao/jianzhiOffer/Main42.java	(date 1586410760473)
++++ src/com/mahongchao/jianzhiOffer/Main42.java	(date 1586410760473)
+@@ -0,0 +1,33 @@
++package com.mahongchao.jianzhiOffer;
++
++import java.util.ArrayList;
++
++public class Main42 {
++    public ArrayList<Integer> FindNumbersWithSum(int[] array, int sum) {
++        ArrayList<Integer> list = new ArrayList<>();
++        if (array.length <= 0) {
++            return list;
++        }
++        int start = 0, end = array.length - 1;
++        while (start < end) {
++            if (array[start] + array[end] == sum) {
++                list.add(array[start]);
++                list.add(array[end]);
++                break;
++            } else if (array[start] + array[end] > sum) {
++                end--;
++            } else if (array[start] + array[end] < sum) {
++                start++;
++            }
++        }
++        return list;
++    }
++
++    public static void main(String[] args) {
++        Main42 main42 = new Main42();
++        int a[] = {-2, -1, 0, 1, 2};
++        ArrayList<Integer> list = main42.FindNumbersWithSum(a, 0);
++        System.out.println(list);
++
++    }
++}
+Index: src/com/mahongchao/jianzhiOffer/Main43.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/mahongchao/jianzhiOffer/Main43.java	(date 1586411608418)
++++ src/com/mahongchao/jianzhiOffer/Main43.java	(date 1586411608418)
+@@ -0,0 +1,27 @@
++package com.mahongchao.jianzhiOffer;
++
++public class Main43 {
++    public String LeftRotateString(String str, int n) {
++        if (str == null || str.length() < n) {
++            return new String();
++        }
++        char[] c = str.toCharArray();
++        swap(c, 0, n - 1);
++        swap(c, n, c.length - 1);
++        swap(c, 0, c.length - 1);
++        return new String(c);
++    }
++
++    public char[] swap(char[] c, int start, int end) {
++        int i = start;
++        int j = end;
++        while (i < j) {
++            char t = c[i];
++            c[i] = c[j];
++            c[j] = t;
++            i++;
++            j--;
++        }
++        return c;
++    }
++}
+Index: src/com/mahongchao/jianzhiOffer/aTest.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/mahongchao/jianzhiOffer/aTest.java	(date 1586405182531)
++++ src/com/mahongchao/jianzhiOffer/aTest.java	(date 1586405182531)
+@@ -0,0 +1,45 @@
++package com.mahongchao.jianzhiOffer;
++
++import java.util.Scanner;
++
++public class aTest {
++    public static void test(long a[]) {
++        long max1 = 0, max2 = 0, max3 = 0, min1 = 0, min2 = 0;
++        //max1 < max2 < max3    min1 < min2
++        for (long l : a) {
++            if (l != 0) {
++                if (l > max3) {//大于最大
++                    max1 = max2;//第二大传到第三大
++                    max2 = max3;//第一大传到第二大
++                    max3 = l;//给第一大
++
++                } else if (l > max2) {
++                    max1 = max2;
++                    max2 = l;
++                } else if (l > max1) {
++                    max1 = l;
++                } else if (l < min2) {//小于最小
++                    min1 = min2;
++                    min2 = l;
++                } else if (l < min1) {
++                    min1 = l;
++                } else {
++                    continue;
++                }
++            }
++        }
++        long max = Math.max((max1 * max2 * max3), (max3 * min1 * min2));
++        System.out.println(max);
++    }
++
++    public static void main(String[] args) {
++        Scanner scanner = new Scanner(System.in);
++        int len = scanner.nextInt();
++        long a[] = new long[len];
++        for (int i = 0; i < len; i++) {
++            a[i] = scanner.nextLong();
++        }
++        test(a);
++
++    }
++}
+Index: src/com/mahongchao/jianzhiOffer/Main41.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/mahongchao/jianzhiOffer/Main41.java	(date 1586407490148)
++++ src/com/mahongchao/jianzhiOffer/Main41.java	(date 1586407490148)
+@@ -0,0 +1,26 @@
++package com.mahongchao.jianzhiOffer;
++
++import java.util.ArrayList;
++
++public class Main41 {
++    public ArrayList<ArrayList<Integer>> FindContinuousSequence(int sum) {
++        ArrayList<ArrayList<Integer>> result = new ArrayList<>();
++        if (sum <= 1) {
++            return result;
++        }
++        int len = sum;
++        for (; len > 1; len--) {//从长的开始，首位数字小
++            if (((2 * sum) % len == 0) && ((2 * sum / len + 1 - len) % 2 == 0)) {
++                int a = (2 * sum / len + 1 - len) / 2;
++                if (a > 0) {
++                    ArrayList list = new ArrayList();
++                    for (int i = 0; i < len; i++) {
++                        list.add(a + i);
++                    }
++                    result.add(list);
++                }
++            }
++        }
++        return result;
++    }
++}
+Index: src/com/mahongchao/jianzhiOffer/Main39.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/mahongchao/jianzhiOffer/Main39.java	(date 1586355447771)
++++ src/com/mahongchao/jianzhiOffer/Main39.java	(date 1586355447771)
+@@ -0,0 +1,22 @@
++package com.mahongchao.jianzhiOffer;
++
++public class Main39 {
++    boolean isBalance = true;
++
++    public boolean IsBalanced_Solution(TreeNode root) {
++        height(root);
++        return isBalance;
++    }
++
++    public int height(TreeNode root) {
++        if (root == null || !isBalance) {
++            return 0;
++        }
++        int left = height(root.left);
++        int right = height(root.right);
++        if (Math.abs(left - right) > 1) {
++            isBalance = false;
++        }
++        return Math.max(left, right) + 1;
++    }
++}
+Index: src/com/mahongchao/jianzhiOffer/Main40.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/mahongchao/jianzhiOffer/Main40.java	(date 1586357207899)
++++ src/com/mahongchao/jianzhiOffer/Main40.java	(date 1586357207899)
+@@ -0,0 +1,12 @@
++package com.mahongchao.jianzhiOffer;
++
++public class Main40 {
++    public void FindNumsAppearOnce(int[] array, int num1[], int num2[]) {
++
++        int temp = array[0];
++        for (int i = 1; i < array.length; i++) {
++            temp ^= array[i];
++        }
++
++    }
++}
+Index: src/com/mahongchao/jianzhiOffer/Main37.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/mahongchao/jianzhiOffer/Main37.java	(date 1586351437237)
++++ src/com/mahongchao/jianzhiOffer/Main37.java	(date 1586351437237)
+@@ -0,0 +1,21 @@
++package com.mahongchao.jianzhiOffer;
++
++import java.util.HashMap;
++import java.util.Map;
++
++public class Main37 {
++    public int GetNumberOfK(int[] array, int k) {
++        Map<Integer, Integer> map = new HashMap<>();
++        for (int i = 0; i < array.length; i++) {
++            if (map.containsKey(array[i])) {
++                map.put(array[i], map.get(array[i]) + 1);
++            } else {
++                map.put(array[i], 1);
++            }
++        }
++        if (map.get(k) == null) {
++            return 0;
++        }
++        return map.get(k);
++    }
++}
+Index: src/com/mahongchao/jianzhiOffer/Main38.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/mahongchao/jianzhiOffer/Main38.java	(date 1586355201931)
++++ src/com/mahongchao/jianzhiOffer/Main38.java	(date 1586355201931)
+@@ -0,0 +1,12 @@
++package com.mahongchao.jianzhiOffer;
++
++public class Main38 {
++    public int TreeDepth(TreeNode root) {
++        if (root == null) {
++            return 0;
++        }
++        int leftLen = TreeDepth(root.left);
++        int rightLen = TreeDepth(root.right);
++        return Math.max(leftLen, rightLen) + 1;
++    }
++}
+Index: src/com/mahongchao/jianzhiOffer/Main35.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/mahongchao/jianzhiOffer/Main35.java	(date 1586349230730)
++++ src/com/mahongchao/jianzhiOffer/Main35.java	(date 1586349230730)
+@@ -0,0 +1,50 @@
++package com.mahongchao.jianzhiOffer;
++
++public class Main35 {
++
++    int count = 0;
++
++    public int InversePairs(int[] array) {
++        mergrSort(array, 0, array.length - 1);
++        return count;
++    }
++
++    public void merge(int[] a, int left, int mid, int right) {
++        int temp[] = new int[a.length], k = left;
++        int i = left, j = mid + 1;
++        while (i <= mid && j <= right) {
++            if (a[i] < a[j]) {
++                temp[k++] = a[i++];
++            } else {
++                temp[k++] = a[j++];
++                count = (count + mid - i + 1) % 1000000007;
++            }
++        }
++        while (i <= mid) {
++            temp[k++] = a[i++];
++        }
++        while (j <= right) {
++            temp[k++] = a[j++];
++        }
++        for (int x = left; x <= right; x++) {
++            a[x] = temp[x];
++        }
++    }
++
++    public void mergrSort(int[] a, int start, int end) {
++        if (start < end) {
++            int mid = (end + start) / 2;
++            mergrSort(a, start, mid);
++            mergrSort(a, mid + 1, end);
++            merge(a, start, mid, end);
++        }
++    }
++
++    public static void main(String[] args) {
++        //int a[] = {1, 2, 3, 4, 5, 6, 7, 0};
++        int a[] = {364, 637, 341, 406, 747, 995, 234, 971, 571, 219, 993, 407, 416, 366, 315, 301, 601, 650, 418, 355, 460, 505, 360, 965, 516, 648, 727, 667, 465, 849, 455, 181, 486, 149, 588, 233, 144, 174, 557, 67, 746, 550, 474, 162, 268, 142, 463, 221, 882, 576, 604, 739, 288, 569, 256, 936, 275, 401, 497, 82, 935, 983, 583, 523, 697, 478, 147, 795, 380, 973, 958, 115, 773, 870, 259, 655, 446, 863, 735, 784, 3, 671, 433, 630, 425, 930, 64, 266, 235, 187, 284, 665, 874, 80, 45, 848, 38, 811, 267, 575};
++        Main35 test = new Main35();
++        int i = test.InversePairs(a);
++        System.out.println(i);
++    }
++}
+Index: src/com/mahongchao/jianzhiOffer/Main36.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/mahongchao/jianzhiOffer/Main36.java	(date 1586350794236)
++++ src/com/mahongchao/jianzhiOffer/Main36.java	(date 1586350794236)
+@@ -0,0 +1,17 @@
++package com.mahongchao.jianzhiOffer;
++
++public class Main36 {
++    public ListNode FindFirstCommonNode(ListNode pHead1, ListNode pHead2) {
++        if (pHead1 == pHead2) {
++            return pHead1;
++        }
++        for (ListNode i = pHead1; i != null; i = i.next) {
++            for (ListNode j = pHead2; j != null; j = j.next) {
++                if (i == j) {
++                    return i;
++                }
++            }
++        }
++        return null;
++    }
++}
+Index: src/com/mahongchao/jianzhiOffer/Main33.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/mahongchao/jianzhiOffer/Main33.java	(date 1586329628274)
++++ src/com/mahongchao/jianzhiOffer/Main33.java	(date 1586329628274)
+@@ -0,0 +1,31 @@
++package com.mahongchao.jianzhiOffer;
++
++import java.util.ArrayList;
++
++public class Main33 {
++    public int GetUglyNumber_Solution(int index) {
++        if (index <= 0) {
++            return 0;
++        }
++        ArrayList<Integer> list = new ArrayList();
++        list.add(1);
++        int i2 = 0, i3 = 0, i5 = 0;//抽象成235三列
++        while (list.size() < index) {
++            int x2 = list.get(i2) * 2;
++            int x3 = list.get(i3) * 3;
++            int x5 = list.get(i5) * 5;
++            int min = Math.min(x2, Math.min(x3, x5));
++            list.add(min);
++            if (min == x2) {//2列后移
++                i2++;
++            }
++            if (min == x3) {//3列后移
++                i3++;
++            }
++            if (min == x5) {//5列后移
++                i5++;
++            }
++        }
++        return list.get(list.size() - 1);
++    }
++}
+Index: src/com/mahongchao/jianzhiOffer/Main34.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/mahongchao/jianzhiOffer/Main34.java	(date 1586333539247)
++++ src/com/mahongchao/jianzhiOffer/Main34.java	(date 1586333539247)
+@@ -0,0 +1,32 @@
++package com.mahongchao.jianzhiOffer;
++
++import java.util.HashMap;
++import java.util.Map;
++
++public class Main34 {
++    public static int FirstNotRepeatingChar(String str) {
++        if (str == null || str.length() <= 0) {
++            return -1;
++        }
++        Map<Character, Integer> map = new HashMap<>();
++        char[] c = str.toCharArray();
++        for (int i = 0; i < c.length; i++) {
++            if (map.containsKey(c[i])) {
++                map.put(c[i], map.get(c[i]) + 1);
++            } else {
++                map.put(c[i], 1);
++            }
++        }
++        for (int i = 0; i < c.length; i++) {
++            if (map.get(c[i]) == 1) {
++                return i;
++            }
++        }
++        return -1;
++    }
++
++    public static void main(String[] args) {
++        String s = "google";
++        System.out.println(FirstNotRepeatingChar(s));
++    }
++}
+Index: src/com/mahongchao/jianzhiOffer/Main31.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/mahongchao/jianzhiOffer/Main31.java	(date 1586319395790)
++++ src/com/mahongchao/jianzhiOffer/Main31.java	(date 1586319395790)
+@@ -0,0 +1,24 @@
++package com.mahongchao.jianzhiOffer;
++
++public class Main31 {
++    public static int NumberOf1Between1AndN_Solution(int n) {
++        int count = 0;
++        if (n <= 0) {
++            return 0;
++        }
++        for (int i = 1; i <= n; i++) {
++            String s = String.valueOf(i);
++            char[] c = s.toCharArray();
++            for (int j = 0; j < c.length; j++) {
++                if (c[j] == '1') {
++                    count++;
++                }
++            }
++        }
++        return count;
++    }
++
++    public static void main(String[] args) {
++        System.out.println(NumberOf1Between1AndN_Solution(13));
++    }
++}
+Index: src/com/mahongchao/jianzhiOffer/Main32.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/mahongchao/jianzhiOffer/Main32.java	(date 1586326473551)
++++ src/com/mahongchao/jianzhiOffer/Main32.java	(date 1586326473551)
+@@ -0,0 +1,25 @@
++package com.mahongchao.jianzhiOffer;
++
++public class Main32 {
++    public String PrintMinNumber(int[] numbers) {
++        if (numbers.length <= 0) {
++            return null;
++        }
++        for (int i = 0; i < numbers.length; i++) {
++            for (int j = i + 1; j < numbers.length; j++) {
++                int a = Integer.valueOf(numbers[i] + "" + numbers[j]);
++                int b = Integer.valueOf(numbers[j] + "" + numbers[i]);
++                if (a > b) {
++                    int t = numbers[i];
++                    numbers[i] = numbers[j];
++                    numbers[j] = t;
++                }
++            }
++        }
++        String s = "";
++        for (int i = 0; i < numbers.length; i++) {
++            s += String.valueOf(numbers[i]);
++        }
++        return s;
++    }
++}
+Index: src/com/mahongchao/jianzhiOffer/Main29.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/mahongchao/jianzhiOffer/Main29.java	(date 1586315560331)
++++ src/com/mahongchao/jianzhiOffer/Main29.java	(date 1586315560331)
+@@ -0,0 +1,21 @@
++package com.mahongchao.jianzhiOffer;
++
++import java.util.ArrayList;
++import java.util.TreeSet;
++
++public class Main29 {
++    public ArrayList<Integer> GetLeastNumbers_Solution(int[] input, int k) {
++        ArrayList<Integer> list = new ArrayList<>();
++        if (k > input.length || input.length <= 0) {
++            return list;
++        }
++        TreeSet<Integer> set = new TreeSet<>();
++        for (int i = 0; i < input.length; i++) {
++            set.add(input[i]);
++        }
++        for (int i = 0; i < k; i++) {
++            list.add(set.pollFirst());
++        }
++        return list;
++    }
++}
+Index: src/com/mahongchao/jianzhiOffer/Main30.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/mahongchao/jianzhiOffer/Main30.java	(date 1586316414956)
++++ src/com/mahongchao/jianzhiOffer/Main30.java	(date 1586316414956)
+@@ -0,0 +1,24 @@
++package com.mahongchao.jianzhiOffer;
++
++public class Main30 {
++    public static int FindGreatestSumOfSubArray(int[] array) {
++        if (array.length <= 0) {
++            return 0;
++        }
++        int i = 0, sum = 0, max = array[0];
++        while (i < array.length) {
++            sum += array[i];
++            max = Math.max(max, sum);
++            if (sum < 0) {
++                sum = 0;
++            }
++            i++;
++        }
++        return max;
++    }
++
++    public static void main(String[] args) {
++        int a[] = {6, -3, -2, 7, -15, 1, 2, 2};
++        System.out.println(FindGreatestSumOfSubArray(a));
++    }
++}
+Index: src/com/mahongchao/jianzhiOffer/Main28.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/mahongchao/jianzhiOffer/Main28.java	(date 1586314099876)
++++ src/com/mahongchao/jianzhiOffer/Main28.java	(date 1586314099876)
+@@ -0,0 +1,26 @@
++package com.mahongchao.jianzhiOffer;
++
++import java.util.HashMap;
++import java.util.Map;
++
++public class Main28 {
++    public int MoreThanHalfNum_Solution(int[] array) {
++        if (array.length <= 0) {
++            return 0;
++        }
++        Map<Integer, Integer> map = new HashMap<>();
++        for (int i = 0; i < array.length; i++) {
++            if (map.containsKey(array[i])) {
++                map.put(array[i], map.get(array[i]) + 1);
++            } else {
++                map.put(array[i], 1);
++            }
++        }
++        for (Integer key : map.keySet()) {
++            if (map.get(key) > array.length / 2) {
++                return key;
++            }
++        }
++        return 0;
++    }
++}
+Index: src/com/mahongchao/jianzhiOffer/Main24.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/mahongchao/jianzhiOffer/Main24.java	(date 1586265641335)
++++ src/com/mahongchao/jianzhiOffer/Main24.java	(date 1586265641335)
+@@ -0,0 +1,29 @@
++package com.mahongchao.jianzhiOffer;
++
++import java.util.ArrayList;
++
++public class Main24 {
++    ArrayList<ArrayList<Integer>> result = new ArrayList<ArrayList<Integer>>();
++    ArrayList<Integer> list = new ArrayList<Integer>();
++
++    public ArrayList<ArrayList<Integer>> FindPath(TreeNode root, int target) {
++        if (root == null) {
++            return result;
++        }
++        list.add(root.val);
++        if (root.left == null && root.right == null && root.val == target) {
++            //到叶子节点并且和正好相等的情况  或  只有根节点的树并且根的值正好相等
++            result.add(new ArrayList<Integer>(list));
++        }
++        if (root.left != null && root.val <= target) {
++            //存在左子树并且值小于或等于的情况
++            FindPath(root.left, target - root.val);
++        }
++        if (root.right != null && root.val <= target) {
++            //存在左子树并且值小于或等于的情况
++            FindPath(root.right, target - root.val);
++        }
++        list.remove(list.size() - 1);
++        return result;
++    }
++}
+Index: src/com/mahongchao/jianzhiOffer/Main27.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/mahongchao/jianzhiOffer/Main27.java	(date 1586311883916)
++++ src/com/mahongchao/jianzhiOffer/Main27.java	(date 1586311883916)
+@@ -0,0 +1,44 @@
++package com.mahongchao.jianzhiOffer;
++
++import java.util.ArrayList;
++import java.util.TreeSet;
++
++public class Main27 {
++    ArrayList<String> result = new ArrayList<>();
++    TreeSet<String> set = new TreeSet<>();
++
++    public ArrayList<String> Permutation(String str) {
++        char[] c = str.toCharArray();
++        fullSort(c, 0, c.length - 1);
++        result.addAll(set);
++        return result;
++    }
++
++    public void fullSort(char[] c, int start, int end) {
++        if (start == end) {
++            set.add(String.valueOf(c));
++        }
++        for (int i = start; i <= end; i++) {
++            swap(c, start, i);
++            fullSort(c, start + 1, end);
++            swap(c, start, i);
++        }
++    }
++
++    public void swap(char a[], int i, int j) {
++        if (i == j) {
++            return;
++        }
++        char t = a[i];
++        a[i] = a[j];
++        a[j] = t;
++    }
++
++
++    public static void main(String[] args) {
++        String s = "abc";
++        Main27 test = new Main27();
++        ArrayList<String> strings = test.Permutation(s);
++        System.out.println(strings);
++    }
++}
+Index: src/com/mahongchao/jianzhiOffer/Main22.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/mahongchao/jianzhiOffer/Main22.java	(date 1586250294941)
++++ src/com/mahongchao/jianzhiOffer/Main22.java	(date 1586250294941)
+@@ -0,0 +1,28 @@
++package com.mahongchao.jianzhiOffer;
++
++import java.util.ArrayList;
++import java.util.LinkedList;
++import java.util.Queue;
++
++public class Main22 {
++    public ArrayList<Integer> PrintFromTopToBottom(TreeNode root) {
++        ArrayList<Integer> list = new ArrayList<Integer>();
++        if (root == null) {
++            return list;
++        }
++        Queue<TreeNode> queue = new LinkedList<>();
++        queue.add(root);
++        while (!queue.isEmpty()) {
++            TreeNode x = queue.poll();
++            list.add(x.val);//取出头层节点，加入list
++
++            if (x.left != null) {
++                queue.add(x.left);
++            }
++            if (x.right != null) {
++                queue.add(x.right);
++            }
++        }
++        return list;
++    }
++}
+Index: src/com/mahongchao/jianzhiOffer/Main23.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/mahongchao/jianzhiOffer/Main23.java	(date 1586263684221)
++++ src/com/mahongchao/jianzhiOffer/Main23.java	(date 1586263684221)
+@@ -0,0 +1,45 @@
++package com.mahongchao.jianzhiOffer;
++
++import java.util.Arrays;
++
++public class Main23 {
++    public static boolean VerifySquenceOfBST(int[] sequence) {
++        if (sequence == null || sequence.length <= 0) {
++            return false;
++        }
++        int root = sequence[sequence.length - 1];
++        int i = 0, rightIndex = 0;
++        for (; i < sequence.length - 1; i++) {
++            ++rightIndex;
++            if (sequence[i] > root) {
++                rightIndex = i;
++                break;
++            }
++        }
++
++        int j = rightIndex;
++        for (; j < sequence.length - 1; j++) {
++            if (sequence[j] < root) {
++                return false;
++            }
++        }
++
++
++        boolean leftFlag = true, rightFlag = true;
++        if (rightIndex > 0) {
++            leftFlag = VerifySquenceOfBST(Arrays.copyOfRange(sequence, 0, rightIndex));
++        }
++        if (rightIndex < sequence.length - 1) {
++            rightFlag = VerifySquenceOfBST(Arrays.copyOfRange(sequence, rightIndex, sequence.length - 1));
++        }
++
++        return leftFlag && rightFlag;
++
++
++    }
++
++    public static void main(String[] args) {
++        int a[] = {5, 6, 7, 8};
++        System.out.println(VerifySquenceOfBST(a));
++    }
++}
+Index: src/com/mahongchao/jianzhiOffer/Main19.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/mahongchao/jianzhiOffer/Main19.java	(date 1586179666725)
++++ src/com/mahongchao/jianzhiOffer/Main19.java	(date 1586179666725)
+@@ -0,0 +1,47 @@
++package com.mahongchao.jianzhiOffer;
++
++import java.util.ArrayList;
++
++public class Main19 {
++    public ArrayList<Integer> printMatrix(int[][] matrix) {
++        ArrayList<Integer> list = new ArrayList<>();
++        int top = 0, bottom = matrix.length - 1, left = 0, right = matrix[0].length - 1;//定义四个角的位置
++        while ((bottom > top) && (right > left)) {
++            //从左到右
++            for (int i = left; i <= right; i++) {
++                list.add(matrix[top][i]);
++            }
++            //从上到下
++            for (int i = top+1; i <= bottom; i++) {
++                list.add(matrix[i][right]);
++            }
++            //从右到左
++            for (int i = right - 1; i >= left; i--) {
++                list.add(matrix[bottom][i]);
++            }
++            //从下到上
++            for (int i = bottom - 1; i > top; i--) {
++                list.add(matrix[i][left]);
++            }
++            left++;
++            right--;
++            top++;
++            bottom--;
++        }
++        if ((bottom == top) && (left < right)) {
++            for (int i = left; i <= right; i++) {
++                list.add(matrix[top][i]);
++            }
++        }
++        if ((right == left) && (top < bottom)) {
++            for (int i = top; i <= bottom; i++) {
++                list.add(matrix[i][left]);
++            }
++        }
++        if ((right == left) && (top == bottom)) {
++            list.add(matrix[top][left]);
++        }
++
++        return list;
++    }
++}
+Index: src/com/mahongchao/jianzhiOffer/Main20.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/mahongchao/jianzhiOffer/Main20.java	(date 1586181053522)
++++ src/com/mahongchao/jianzhiOffer/Main20.java	(date 1586181053522)
+@@ -0,0 +1,32 @@
++package com.mahongchao.jianzhiOffer;
++
++import java.util.Stack;
++
++public class Main20 {
++    Stack<Integer> my_stack = new Stack<Integer>();
++    Stack<Integer> min_stack = new Stack<Integer>();
++
++    public void push(int node) {
++        if (min_stack.isEmpty()) {
++            min_stack.push(node);
++        }
++        if (node < min_stack.peek()) {
++            min_stack.push(node);
++        }
++        my_stack.push(node);
++    }
++
++    public void pop() {
++        if (my_stack.pop() == min_stack.peek()) {
++            min_stack.pop();
++        }
++    }
++
++    public int top() {
++        return my_stack.peek();
++    }
++
++    public int min() {
++        return min_stack.peek();
++    }
++}
+Index: src/com/mahongchao/jianzhiOffer/TreeNode.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/mahongchao/jianzhiOffer/TreeNode.java	(date 1586169512210)
++++ src/com/mahongchao/jianzhiOffer/TreeNode.java	(date 1586169512210)
+@@ -0,0 +1,13 @@
++package com.mahongchao.jianzhiOffer;
++
++public class TreeNode {
++
++    int val;
++    TreeNode left;
++    TreeNode right;
++
++    TreeNode(int x) {
++        val = x;
++    }
++
++}
+Index: src/com/mahongchao/jianzhiOffer/Main18.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/mahongchao/jianzhiOffer/Main18.java	(date 1586245997314)
++++ src/com/mahongchao/jianzhiOffer/Main18.java	(date 1586245997314)
+@@ -0,0 +1,18 @@
++package com.mahongchao.jianzhiOffer;
++
++public class Main18 {
++    public void Mirror(TreeNode root) {
++        if (root == null) {
++            return;
++        }
++
++        TreeNode left = root.left;
++        TreeNode right = root.right;
++        root.left=right;
++        root.right=left;
++
++        Mirror(root.left);
++        Mirror(root.right);
++
++    }
++}
+Index: src/Test/Main0.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/Test/Main0.java	(date 1586570603105)
++++ src/Test/Main0.java	(date 1586570603105)
+@@ -0,0 +1,31 @@
++package Test;
++
++import java.util.Scanner;
++
++public class Main0 {
++    public static String list_string(Long N, int L) {
++        if (L > N || L > 100 || L < 2 || N < 1 || N > 1000000000) return "No";
++        String line = "";
++        for (; L <= 100 && L < N; L++) {
++            if ((2 * N) % L == 0 && (2 * N / L + 1 - L) % 2 == 0) {//双重判定，防止纰漏
++                long s = (2 * N / L + 1 - L) / 2;
++                int j = 0;
++                while (j < L) {
++                    line += String.valueOf(s) + " ";
++                    s += 1;
++                    j++;
++                }
++                return line;
++            }
++        }
++        return "No";
++    }
++
++    public static void main(String arr[]) {
++        Scanner scan = new Scanner(System.in);
++        long N = scan.nextLong();
++        int L = scan.nextInt();
++        System.out.println(list_string(N, L).trim());
++    }
++
++}
+Index: src/com/mahongchao/jianzhiOffer/Main21.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/mahongchao/jianzhiOffer/Main21.java	(date 1586247742410)
++++ src/com/mahongchao/jianzhiOffer/Main21.java	(date 1586247742410)
+@@ -0,0 +1,32 @@
++package com.mahongchao.jianzhiOffer;
++
++import java.util.Stack;
++
++public class Main21 {
++    public static boolean IsPopOrder(int[] pushA, int[] popA) {
++        if (pushA.length <= 0 || popA.length <= 0) {
++            return false;
++        }
++        Stack<Integer> stack = new Stack<Integer>();
++        int j = 0;
++        for (int i = 0; i < pushA.length; i++) {
++            stack.push(pushA[i]);//压栈
++            while (!stack.isEmpty() && (stack.peek() == popA[j])) {
++                stack.pop();
++                j++;
++            }
++        }
++
++        if (stack.isEmpty()) {
++            return true;
++        }
++        return false;
++    }
++
++    public static void main(String[] args) {
++        int a[] = {1, 2, 3, 4, 5};
++        int b[] = {4, 5, 3, 2, 1};
++        int c[] = {4, 3, 5, 1, 2};
++        System.out.println(IsPopOrder(a, c));
++    }
++}
+\ No newline at end of file
+Index: src/com/mahongchao/jianzhiOffer/Main16.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/mahongchao/jianzhiOffer/Main16.java	(date 1586245997331)
++++ src/com/mahongchao/jianzhiOffer/Main16.java	(date 1586245997331)
+@@ -0,0 +1,67 @@
++package com.mahongchao.jianzhiOffer;
++
++public class Main16 {
++    /**
++     * 递归
++     *
++     * @param list1
++     * @param list2
++     * @return
++     */
++    public ListNode Merge(ListNode list1, ListNode list2) {
++        if (list1 == null) {
++            return list2;
++        }
++        if (list2 == null) {
++            return list1;
++        }
++        ListNode head;
++        if (list1.val <= list2.val) {
++            head = list1;
++            head.next = Merge(list1.next, list2);
++        } else {
++            head = list2;
++            head.next = Merge(list1, list2.next);
++        }
++        return head;
++    }
++
++    /**
++     * 基本操作
++     *
++     * @param list1
++     * @param list2
++     * @return
++     */
++    public ListNode Merge2(ListNode list1, ListNode list2) {
++        if (list1 == null) {
++            return list2;
++        }
++        if (list2 == null) {
++            return list1;
++        }
++        ListNode a = list1;
++        ListNode b = list2;
++        ListNode head = new ListNode(-1);
++        ListNode result = head;
++        while (a != null && b != null) {
++            if (a.val <= b.val) {
++                head.next = a;
++                head = a;
++                a = a.next;
++            } else {
++                head.next = b;
++                head = b;
++                b = b.next;
++            }
++        }
++        if (a == null) {
++            head.next = b;
++        }
++        if (b == null) {
++            head.next = a;
++        }
++
++        return result.next;
++    }
++}
+Index: src/com/mahongchao/jianzhiOffer/Main17.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/mahongchao/jianzhiOffer/Main17.java	(date 1586245997292)
++++ src/com/mahongchao/jianzhiOffer/Main17.java	(date 1586245997292)
+@@ -0,0 +1,30 @@
++package com.mahongchao.jianzhiOffer;
++
++public class Main17 {
++
++    public boolean HasSubtree(TreeNode root1, TreeNode root2) {
++        boolean result = false;
++        if (root1 != null && root2 != null) {
++            if (root1.val == root2.val) {//根节点相同
++                result = AHaveB(root1, root2);//比较是否包含
++            }
++            if (result == false) {//根节点不相同  或者  根节点相同，子节点不同
++                result = AHaveB(root1.left, root2) || AHaveB(root1.right, root2);
++            }
++        }
++        return result;
++    }
++
++    public boolean AHaveB(TreeNode root1, TreeNode root2) {
++        if (root2 == null) {
++            return true;
++        }
++        if (root1 == null) {
++            return false;
++        }
++        if (root1.val == root2.val) {//根节点相同，比较左子树和右子树是否相同
++            return AHaveB(root1.left, root2.left) && AHaveB(root1.right, root2.right);
++        }
++        return false;
++    }
++}
+Index: src/com/mahongchao/jianzhiOffer/Main14.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/mahongchao/jianzhiOffer/Main14.java	(date 1586245997320)
++++ src/com/mahongchao/jianzhiOffer/Main14.java	(date 1586245997320)
+@@ -0,0 +1,24 @@
++package com.mahongchao.jianzhiOffer;
++
++public class Main14 {
++    public ListNode FindKthToTail(ListNode head, int k) {
++        ListNode a = head;
++        ListNode b = head;
++        int i = 0, j = 0;
++        while (i < k) {
++            if (b == null) {
++                return null;
++            }
++            b = b.next;
++            i++;
++            j++;//节点个数
++        }
++        while (b != null) {
++            a = a.next;
++            b = b.next;
++            j++;
++        }
++        return a;
++
++    }
++}
+Index: src/com/mahongchao/jianzhiOffer/Main15.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/mahongchao/jianzhiOffer/Main15.java	(date 1586245997282)
++++ src/com/mahongchao/jianzhiOffer/Main15.java	(date 1586245997282)
+@@ -0,0 +1,53 @@
++package com.mahongchao.jianzhiOffer;
++
++import java.util.Stack;
++
++public class Main15 {
++    /**
++     * 栈方法（定义的链表点一定要初始化 a.next=null）
++     * @param head
++     * @return
++     */
++    public ListNode ReverseList(ListNode head) {
++        if (head == null) {
++            return null;
++        }
++        Stack<ListNode> stack = new Stack<>();
++        while (head != null) {
++            stack.push(head);
++            head = head.next;
++        }
++
++        ListNode a = stack.pop();
++        a.next = null;//初始化
++        ListNode result = a;
++        while (!stack.isEmpty()) {
++            ListNode x = stack.pop();
++            x.next = null;//初始化
++
++            a.next = x;
++
++            a = a.next;
++            a.next = null;//初始化
++        }
++        return result;
++    }
++
++    public ListNode ReverseList2(ListNode head) {
++        if (head == null) {
++            return null;
++        }
++        ListNode a = head;//设置前指针
++        ListNode b = head.next;//设置后指针
++        while (b != null) {
++            ListNode x = b.next;//临时存放后指针的下一位，避免在指向消除后丢失，影响后续指针的移动。
++            b.next = a;//改变链表方向
++
++            a = b;//后移一位前指针
++            b = x;//后移一位后指针
++        }
++        head.next = null;
++        return a;
++    }
++
++}
+Index: src/com/mahongchao/jianzhiOffer/Main12.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/mahongchao/jianzhiOffer/Main12.java	(date 1586245997268)
++++ src/com/mahongchao/jianzhiOffer/Main12.java	(date 1586245997268)
+@@ -0,0 +1,17 @@
++package com.mahongchao.jianzhiOffer;
++
++public class Main12 {
++    public double Power(double base, int exponent) {
++        double x = 1;
++        for (int i = 0; i < Math.abs(exponent); i++) {
++            x *= base;
++        }
++        if (exponent == 0) {
++            return 1;
++        }
++        if (exponent < 0) {
++            return 1.0 / x;
++        }
++        return x;
++    }
++}
+Index: src/com/mahongchao/jianzhiOffer/Main13.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/mahongchao/jianzhiOffer/Main13.java	(date 1586245997358)
++++ src/com/mahongchao/jianzhiOffer/Main13.java	(date 1586245997358)
+@@ -0,0 +1,28 @@
++package com.mahongchao.jianzhiOffer;
++
++import java.util.PriorityQueue;
++import java.util.Queue;
++
++public class Main13 {
++    public void reOrderArray(int[] array) {
++        int k = 0;
++        Queue q1 = new PriorityQueue();
++        Queue q2 = new PriorityQueue();
++        for (int i = 0; i < array.length; i++) {
++            if (array[i] % 2 == 0) {
++                q2.add(array[i]);
++            } else {
++                q1.add(array[i]);
++            }
++        }
++        while (!q1.isEmpty()) {
++            array[k] = (int) q1.poll();
++            k++;
++        }
++        while (!q2.isEmpty()) {
++            array[k] = (int) q2.poll();
++            k++;
++        }
++
++    }
++}
+Index: src/com/mahongchao/jianzhiOffer/Main10.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/mahongchao/jianzhiOffer/Main10.java	(date 1586245997296)
++++ src/com/mahongchao/jianzhiOffer/Main10.java	(date 1586245997296)
+@@ -0,0 +1,11 @@
++package com.mahongchao.jianzhiOffer;
++
++public class Main10 {
++    public int RectCover(int target) {
++        if (target <= 2) {
++            return target;
++        } else {
++            return RectCover(target - 1) + RectCover(target - 2);
++        }
++    }
++}
+Index: src/com/mahongchao/jianzhiOffer/Main11.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/mahongchao/jianzhiOffer/Main11.java	(date 1586245997308)
++++ src/com/mahongchao/jianzhiOffer/Main11.java	(date 1586245997308)
+@@ -0,0 +1,14 @@
++package com.mahongchao.jianzhiOffer;
++
++public class Main11 {
++    public int NumberOf1(int n) {
++        int count = 0;
++        char[] c = Integer.toBinaryString(n).toCharArray();
++        for (int i = 0; i < c.length; i++) {
++            if(c[i]=='1'){
++                count++;
++            }
++        }
++        return count;
++    }
++}
+Index: src/com/mahongchao/jianzhiOffer/Main8.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/mahongchao/jianzhiOffer/Main8.java	(date 1586245997326)
++++ src/com/mahongchao/jianzhiOffer/Main8.java	(date 1586245997326)
+@@ -0,0 +1,36 @@
++package com.mahongchao.jianzhiOffer;
++
++public class Main8 {
++    /**
++     * 递归
++     *
++     * @param target
++     * @return
++     */
++    public int JumpFloor(int target) {
++        if (target <= 2) {
++            return target;
++        } else {
++            return JumpFloor(target - 1) + JumpFloor(target - 2);
++        }
++    }
++
++    /**
++     * 非递归
++     *
++     * @param target
++     * @return
++     */
++    public int JumpFloor2(int target) {
++        int x = 1, y = 2, sum = 0;
++        if (target <= 2) {
++            return target;
++        }
++        for (int i = 3; i <= target; i++) {
++            sum = x + y;
++            x = y;
++            y = sum;
++        }
++        return sum;
++    }
++}
+Index: src/com/mahongchao/jianzhiOffer/Main9.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/mahongchao/jianzhiOffer/Main9.java	(date 1586245997275)
++++ src/com/mahongchao/jianzhiOffer/Main9.java	(date 1586245997275)
+@@ -0,0 +1,11 @@
++package com.mahongchao.jianzhiOffer;
++
++public class Main9 {
++    public int JumpFloorII(int target) {
++        if (target <= 2) {
++            return target;
++        } else {
++            return JumpFloorII(target - 1) * 2;
++        }
++    }
++}
+Index: src/com/mahongchao/jianzhiOffer/Main6.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/mahongchao/jianzhiOffer/Main6.java	(date 1586245997287)
++++ src/com/mahongchao/jianzhiOffer/Main6.java	(date 1586245997287)
+@@ -0,0 +1,42 @@
++package com.mahongchao.jianzhiOffer;
++
++/**
++ * 数组的左右两半为有序数组，找到分界点，然后对两个子数组取反，再对整个数组取反，即为有序数组
++ */
++public class Main6 {
++    public int minNumberInRotateArray(int[] a) {
++        int i = 0, j = a.length - 1;
++        while (a[i] <= a[i + 1]) {
++            i++;
++        }
++        while (a[j - 1] <= a[j]) {
++            j--;
++        }
++        arraySwap(a, j, a.length - 1);
++        arraySwap(a, 0, i);
++        arraySwap(a, 0, a.length - 1);
++        for (int k = 0; k < a.length; k++) {
++            System.out.print(a[k] + ",");
++        }
++        return a[0];
++    }
++
++    public void arraySwap(int a[], int start, int end) {
++        int t;
++        while (start < end) {
++            t = a[start];
++            a[start] = a[end];
++            a[end] = t;
++            start++;
++            end--;
++        }
++    }
++
++    public static void main(String[] args) {
++        Main6 youxuziArrayXunzhuan = new Main6();
++        int a[] = {3, 4, 5, 5, 5, 8, 9, 2, 2};
++        int i = youxuziArrayXunzhuan.minNumberInRotateArray(a);
++        System.out.println();
++        System.out.println(i);
++    }
++}
+Index: src/com/mahongchao/jianzhiOffer/Main7.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/mahongchao/jianzhiOffer/Main7.java	(date 1586245997302)
++++ src/com/mahongchao/jianzhiOffer/Main7.java	(date 1586245997302)
+@@ -0,0 +1,19 @@
++package com.mahongchao.jianzhiOffer;
++
++/**
++ * 斐波那契数列
++ */
++public class Main7 {
++    public int Fibonacci(int n) {
++        int x = 0, y = 1, sum = 0;
++        if(n<=1){
++            return n;
++        }
++        for (int i = 2; i <= n; i++) {
++            sum = x + y;
++            x = y;
++            y = sum;
++        }
++        return sum;
++    }
++}
+Index: src/com/mahongchao/jianzhiOffer/qianxuzhongquTotree.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/mahongchao/jianzhiOffer/qianxuzhongquTotree.java	(date 1586169512216)
++++ src/com/mahongchao/jianzhiOffer/qianxuzhongquTotree.java	(date 1586169512216)
+@@ -0,0 +1,31 @@
++package com.mahongchao.jianzhiOffer;
++
++
++
++public class qianxuzhongquTotree {
++    public TreeNode reConstructBinaryTree(int[] pre, int preStart, int preEnd, int[] in, int inStart, int inEnd) {
++        TreeNode root = new TreeNode(pre[preStart]);
++        int inRootIndex = findIndexInArray(in, root.val, inStart, inEnd);
++        int leftTreeLength = inRootIndex - preStart;
++        int rightTreeLength = inEnd - preStart;
++
++        //创建左子树
++        TreeNode left = reConstructBinaryTree(pre, preStart + 1, preStart + 1 + leftTreeLength, in, inStart, inRootIndex + rightTreeLength - 1);
++        //创建右子树
++        TreeNode right = reConstructBinaryTree(pre, preEnd - rightTreeLength, preEnd, in, inEnd - rightTreeLength, inEnd);
++
++        root.left = left;
++        root.right = right;
++        return root;
++
++    }
++
++    public int findIndexInArray(int[] a, int x, int start, int end) {
++        for (int i = start; i <= end; i++) {
++            if (a[i] == x) {
++                return i;
++            }
++        }
++        return -1;
++    }
++}
+Index: src/com/mahongchao/jianzhiOffer/Main5.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/mahongchao/jianzhiOffer/Main5.java	(date 1586245997336)
++++ src/com/mahongchao/jianzhiOffer/Main5.java	(date 1586245997336)
+@@ -0,0 +1,28 @@
++package com.mahongchao.jianzhiOffer;
++
++import java.util.Stack;
++
++/**
++ * 队列：先进先出
++ * 栈：先进后出
++ * 1、将代码的存操作，压栈进入stack1；
++ * 2、若出现代码的取操作，判断stack2是否弹栈完成（没有则先完成弹栈并返回，直至为空），将stack1弹栈并压栈进入stack2，直至stack1为空，并返回
++ */
++public class Main5 {
++    Stack<Integer> stack1 = new Stack<Integer>();
++    Stack<Integer> stack2 = new Stack<Integer>();
++
++    public void push(int node) {
++        stack1.push(node);
++    }
++
++    public int pop() {
++        while (!stack2.isEmpty()) {
++            return stack2.pop();
++        }
++        while (!stack1.isEmpty()) {
++            stack2.push(stack1.pop());
++        }
++        return stack2.pop();
++    }
++}
